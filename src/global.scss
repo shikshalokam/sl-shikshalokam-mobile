@@ -1,0 +1,39 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+
+thead{
+    th{
+        min-width:20%;
+        max-width:20%;
+        height: 40px;
+    }
+}
+tbody{
+    td{
+        min-width:20%;
+        max-width:20%;
+        height: 40px;
+        font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    }
+    
+}
+table{
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    th,td, td{
+        border:1px solid #ccc;
+    };
+}

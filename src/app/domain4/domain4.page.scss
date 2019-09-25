@@ -1,0 +1,22 @@
+thead{
+    th{
+        min-width:20%;
+        max-width:20%;
+        height: 40px;
+    }
+}
+tbody{
+    td{
+        min-width:20%;
+        max-width:20%;
+        height: 40px;
+    }
+}
+table{
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    th,td, td{
+        border:1px solid #ccc;
+    };
+}
