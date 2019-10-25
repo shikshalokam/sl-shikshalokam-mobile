@@ -1,92 +1,172 @@
 import { Component, OnInit } from '@angular/core';
 import { AppLauncher, AppLauncherOptions } from '@ionic-native/app-launcher/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Login } from '../login.service';
+import { AppConfigs } from "../app.config";
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
 
-  private applications =[];
-  private showNotifications:boolean = true;
-  private dashboard =[{
-    name:'Learning',
-    id:2,
+  private applications = [];
+  private showNotifications: boolean = true;
+  private redirect_url: string;
+  private logout_url: string;
+  private auth_url: string;
+  private base_url: string;
+  private dashboard = [{
+    name: 'Learning',
+    id: 2,
     //url:'',
   },
   {
-    name:'Unnati',
-    id:3,
+    name: 'Unnati',
+    id: 3,
     //url:'',
   }];
-  constructor(private appLauncher: AppLauncher) {
+  constructor(private appLauncher: AppLauncher, private router: Router, private storage: Storage, public toastController: ToastController, private iab: InAppBrowser, private login: Login, ) {
     //this.token1 =  localStorage.getItem('mayBeToken');
-   // this.menuCtrl.enable(true);
+    // this.menuCtrl.enable(true);
   }
 
- 
-  ngOnInit()
-  {
+
+  ngOnInit() {
     this.prepareJson();
   }
 
-public closeNotification()
-{
-  this.showNotifications = ! this.showNotifications;
-}
-
-  // Prepare JSON for list of application
-  public prepareJson()
-  {
-    this.applications =[
-      {
-        title:'Samiksha',
-        subTitle:'Assessments App',
-        icon:'/assets/images/Samiksha.png',
-        id:'org.shikshalokam.samiksha'
-      },
-      {
-      title:'Unnati',
-      subTitle:'Improvement Projects App',
-      icon:'/assets/images/Unnati.png',
-      id:'org.shikshalokam.unnati'
-    },
-    {
-      title:'Bodh',
-      subTitle:'Learning App',
-      icon:'/assets/images/Bodh.png',
-      id:'org.shikshalokam.bodh'
-    },
-  ]
+  public closeNotification() {
+    this.showNotifications = !this.showNotifications;
   }
 
-   //Launch learner App
-   public openApp(id)
-   {
-
-    // org.shikshalokam.app://community.shikshalokam.org/learn
-     const options: AppLauncherOptions = {
-       packageName: id,
-     }
-     this.appLauncher.canLaunch(options).then((canLaunch: boolean) => 
-     {
-        if(canLaunch)
+  // Prepare JSON for list of application
+  public prepareJson() {
+    this.applications = [
       {
-        this.appLauncher.launch(options).then(()=>{
-        },(err) =>{
-          console.log(canLaunch +'===== ddddd ===='+ err + "error");
-          console.log('https://play.google.com/store/apps/details?id='+id+'&hl=en','_system',"link")
-          window.open('https://play.google.com/store/apps/details?id='+id+'&hl=en','_system')
-        })
-      }else {
-        console.log(canLaunch);
-        console.log('https://play.google.com/store/apps/details?id='+id+'&hl=en','_system',"link")
-        window.open('https://play.google.com/store/apps/details?id='+id+'&hl=en','_system')
+        title: 'Experience Personalized Learning',
+        appName: 'Bodh',
+        icon: '/assets/images/bodh-h.png',
+        id: 'org.shikshalokam.bodh'
+      },
+      {
+        title: 'Identify Areas of Improvement',
+        appName: 'Samiksha',
+        icon: '/assets/images/samiksha-h.png',
+        id: 'org.shikshalokam.samiksha'
+      },
+      {
+        title: 'Create and Track Projects',
+        appName: 'Unnati',
+        icon: '/assets/images/unnati-h.png',
+        id: 'org.shikshalokam.unnati'
       }
-   }, error => {
-    console.log('https://play.google.com/store/apps/details?id='+id+'&hl=en','_system',"link")
-        window.open('https://play.google.com/store/apps/details?id='+id+'&hl=en','_system')
-  })
-   }
+    ]
+  }
+
+  //Launch learner App
+  public openApp(id) {
+    // org.shikshalokam.app://community.shikshalokam.org/learn
+    const options: AppLauncherOptions = {
+      packageName: id,
+    }
+    this.appLauncher.canLaunch(options).then((canLaunch: boolean) => {
+      if (canLaunch) {
+        this.appLauncher.launch(options).then(() => {
+        }, (err) => {
+          if (navigator.onLine) {
+            window.open('https://play.google.com/store/apps/details?id=' + id + '&hl=en', '_system')
+          } else {
+            this.errorMessage('Check your internet Connection.');
+          }
+        })
+      } else {
+        if (navigator.onLine) {
+          window.open('https://play.google.com/store/apps/details?id=' + id + '&hl=en', '_system')
+        } else {
+          this.errorMessage('Check your internet Connection.');
+        }
+      }
+    }, error => {
+      if (navigator.onLine) {
+        window.open('https://play.google.com/store/apps/details?id=' + id + '&hl=en', '_system')
+      } else {
+        this.errorMessage('Check your internet Connection.');
+      }
+    })
+  }
+  //  Navigate to dashboard if user logged in otherwise navigate to login
+  public navigateToDashboard() {
+    if (localStorage.getItem("token") != null) {
+      this.router.navigateByUrl('/dashboard-chart');
+    } else {
+      if (navigator.onLine) {
+        // this.router.navigateByUrl('/login');
+        this.doLogin();
+      } else {
+        this.errorMessage('Check your internet Connection.');
+      }
+    }
+  }
+  public open()
+  {
+    window.open("unnati://project-view/projects");
+  }
+
+  // Login
+  public doLogin() {
+    this.doOAuthStepOne().then(success => {
+      this.login.doOAuthStepTwo(success).then(success1 => {
+        this.login.checkForCurrentUserLocalData(success1);
+        this.storage.set('userTokens', success1).then(data => {
+          this.login.loggedIn('true');
+          this.router.navigateByUrl('/dashboard');
+        });
+        localStorage.setItem('token', success1);
+        this.login.loggedIn('true');
+        localStorage.setItem("networkStatus", 'true');
+      }).catch(error1 => {
+      })
+    }).catch(error => {
+    })
+  }
+  public doOAuthStepOne(): Promise<any> {
+    this.base_url = AppConfigs.app_url;
+    this.redirect_url = AppConfigs.keyCloak.redirection_url;
+    this.auth_url = this.base_url + "/auth/realms/sunbird/protocol/openid-connect/auth?response_type=code&scope=offline_access&client_id=" + AppConfigs.clientId + "&redirect_uri=" +
+      this.redirect_url;
+    let that = this;
+    return new Promise(function (resolve, reject) {
+      let closeCallback = function (event) {
+        reject("The Sunbird sign in flow was canceled");
+      };
+      let browserRef = (<any>window).cordova.InAppBrowser.open(that.auth_url, "_blank", "zoom=no");
+      browserRef.addEventListener('loadstart', function (event) {
+        if (event.url && ((event.url).indexOf(that.redirect_url) === 0)) {
+          browserRef.removeEventListener("exit", closeCallback);
+          let responseParameters = (((event.url).split("?")[1]).split("="))[1];
+          if (responseParameters !== undefined) {
+            this.show = false;
+            browserRef.close();
+            resolve(responseParameters);
+          } else {
+            reject("Problem authenticating with Sunbird");
+          }
+        }
+      });
+    });
+  }
+  // Error toast message
+  async errorMessage(msg) {
+    const toast = await this.toastController.create({
+      message: msg, color: 'danger',
+      duration: 2000
+    });
+    toast.present();
+  }
 }

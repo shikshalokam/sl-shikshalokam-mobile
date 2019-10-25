@@ -1,0 +1,60 @@
+.activity-month {
+  font-weight: 900;
+  color: #af4038;
+}
+.horizontal-bar {
+  border-bottom: 1px solid #ccc;
+}
+.mostviewed-cntn-box {
+  color: #af4038;
+  border-bottom: 1px solid #ccc;
+  .title {
+    font-weight: 900;
+  }
+  ion-card {
+    margin: 10px 0px;
+    padding: 10px;
+    background: #af4038;
+    color: #fff;
+    border-radius: 0px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+.no-data-msg {
+  background: #fff !important;
+  color: #af4038 !important;
+  text-align: center;
+  margin: 20px !important;
+}
+
+
+.custom-card {
+  margin: 10px 0px;
+  padding: 10px;
+  background: #fff !important ;
+  color: #000 !important;
+  font-size: 16px;
+  h5{
+    text-align: center;
+  }
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.expansionPanel {
+  border-radius: 10px;
+}

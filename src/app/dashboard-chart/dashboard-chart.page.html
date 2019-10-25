@@ -3,41 +3,22 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Status</ion-title>
+    <ion-title>Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col> <b>Project initiated : </b> 3  </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col> <b>Project inprogress : </b> 2 </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col><b>Project completed :</b> 0 </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-          <ion-row>
-              <ion-col> <b>Enrollment drive : 90% </b> </ion-col>
-              <ion-col
-                ><ion-progress-bar color="primary" value="0.9"  style="height: 10px; margin-top:5px;"> </ion-progress-bar
-              ></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col> <b> Library : 30% </b> </ion-col
-              ><ion-col>
-                <ion-progress-bar color="primary" value="0.3"  style="height: 10px; margin-top:5px;"> </ion-progress-bar
-              ></ion-col>
-            </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
+<ion-content style="--background:#e0e0e0;">
+  <!-- Dashboard content -->
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let application of applications">
+        <ion-card (click)="navigateToContent(application.appName)">
+          <ion-card-header>
+            <ion-img src="{{ application.icon }}"></ion-img>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+

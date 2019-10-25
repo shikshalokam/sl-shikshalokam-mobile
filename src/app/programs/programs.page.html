@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
+    <ion-title>Programs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="programs">
+    <ion-card *ngFor="let program of programs">
+      <ion-card-header style="background:#e1e4e8">{{ program.programName }} </ion-card-header>
+      <ion-card-content style="    padding-top: 10px;"
+        *ngFor="let solution of program.solutions"
+        (click)="getReports(program.programId, solution.solutionId)"
+      >
+        {{ solution.solutionName }}  <ion-icon style="float:right" name="arrow-forward"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

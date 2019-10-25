@@ -8,8 +8,12 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-   
+<ion-content style="--background: #e0e0e0;">
+  <div class="welcome-note">
+    <h4 color="primary">Welcome to Shikshalokam App!</h4>
+  </div>
+
+  <!-- <ion-button (click)="open()"> Unnati projects </ion-button> -->
   <!-- Voting  -->
 
   <!-- <ion-row style="color:#fff;background: #13b313;
@@ -19,7 +23,7 @@
     <ion-col style="text-align:right;">  <ion-icon name="close" (click)="closeNotification()" ></ion-icon></ion-col>
   </ion-row> -->
   <!-- App suite -->
-  <ion-card>
+  <!-- <ion-card>
       <ion-item-group>
           <ion-item-divider color="light">
               <h4 class="bold" text-wrap text-capitalize>  App Suite</h4>
@@ -42,10 +46,30 @@
         </ion-grid>
       </ion-card>
     </ion-card-content>
-  </ion-card>
- <!-- My Journey -->
-
- <!-- <ion-card>
+  </ion-card> -->
+  <div class="app-suite">
+    <div *ngFor="let application of applications">
+      <ion-grid>
+        <ion-row (click)="openApp(application.id)">
+          <img src="{{ application.icon }}" />
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div class="app-suite">
+    <ion-grid (click)="navigateToDashboard()">
+      <ion-row>
+        <img src="../../assets/images/dashboard-h.png" />
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <img src="../../assets/images/myJourney-h.png" />
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- My Journey -->
+  <!-- <ion-card>
     <ion-card-header
       style="background-color: #e6e4e4; padding: 10px 5px 10px 10px;"
     >
@@ -72,7 +96,7 @@
   </ion-card> -->
 
   <!-- Dashbaord -->
-  
+
   <!-- <ion-card>
     <ion-card-header
       style="background-color: #e6e4e4; padding: 10px 5px 10px 10px;"
@@ -120,5 +144,5 @@
           </ion-card>
     </ion-card-content>
   </ion-card> -->
- 
 </ion-content>
+

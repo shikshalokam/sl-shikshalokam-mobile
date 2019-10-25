@@ -14,16 +14,15 @@ const routes: Routes = [
   ,
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
   { path: 'my-journey', loadChildren: './my-journey/my-journey.module#MyJourneyPageModule' },
-  { path: 'dashboard-chart', loadChildren: './dashboard-chart/dashboard-chart.module#DashboardChartPageModule' },
-  { path: 'assesment-chart', loadChildren: './assesment-chart/assesment-chart.module#AssesmentChartPageModule' },
+ { path: 'dashboard-chart', loadChildren: './dashboard-chart/dashboard-chart.module#DashboardChartPageModule' },
   { path: 'learning-chart', loadChildren: './learning-chart/learning-chart.module#LearningChartPageModule' },
-  { path: 'domain1', loadChildren: './domain1/domain1.module#Domain1PageModule' },
-  { path: 'domain2', loadChildren: './domain2/domain2.module#Domain2PageModule' },
-  { path: 'domain4', loadChildren: './domain4/domain4.module#Domain4PageModule' },
-  { path: 'domain3', loadChildren: './domain3/domain3.module#Domain3PageModule' },
-  { path: 'voting', loadChildren: './voting/voting.module#VotingPageModule' },
-  { path: 'vote-report', loadChildren: './vote-report/vote-report.module#VoteReportPageModule' },
+  { path: 'app-content/:appname', loadChildren: './app-content/app-content.module#AppContentPageModule' }, 
+  { path: 'top-contents/:type', loadChildren: './top-contents/top-contents.module#TopContentsPageModule' },
+  { path: 'top-contents/:prgrmId/:slnId/:type', loadChildren: './top-contents/top-contents.module#TopContentsPageModule' },
+  { path: 'entities/:id/:type/:group', loadChildren: './entities/entities.module#EntitiesPageModule' },
+  { path: 'programs/:entityId/:entityType/:subType', loadChildren: './programs/programs.module#ProgramsPageModule' },
 ];
+
 
 @NgModule({
   imports: [

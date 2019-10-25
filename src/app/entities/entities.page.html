@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
+    <ion-title>Entities</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="entities">
+    <ion-card
+      style="padding:15px;"
+      *ngFor="let entity of entities"
+      (click)="
+        getProgramList(
+          entity.entityId,
+          entity.entityType,
+          entity.immediateSubEntityType
+        )
+      "
+    >
+      {{ entity.name }}
+      <ion-icon style="float:right" name="arrow-forward"></ion-icon>
+    </ion-card>
+  </div>
+  <!-- skeleton / loader -->
+  <div *ngIf="showSkeleton">
+    <div class="skeleton-card-content">
+      <ion-card *ngFor="let skeleton of skeletons">
+        <ion-card-content class="skeleton-card-content">
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text
+            ><ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <!-- skeleton / loader ends here-->
+  <!-- print message if no data -->
+  <div *ngIf="showNoMsgCard">
+    <ion-card class="no-data-msg"> <h5>No Data available.</h5></ion-card>
+  </div>
+</ion-content>
