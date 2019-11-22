@@ -22,6 +22,7 @@ coverage/
 www/
 node_modules/
 src/app/app.config.ts
+package-lock.json
 tmp/
 temp/
 platforms/

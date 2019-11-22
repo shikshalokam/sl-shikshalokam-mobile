@@ -14,6 +14,7 @@ export class AppContentPage implements OnInit {
    public appName;
    public title;
    public showSkeleton;
+   public showNoMsgCard: boolean = false;
    private roles;
    private skeletons = [{}, {}, {}, {}, {}, {}, {}];
    constructor(private activatedRoute: ActivatedRoute, private appContentService: AppContentService, private router: Router, public toastController: ToastController, private storage: Storage, private api: ApiProvider, ) {
@@ -24,7 +25,11 @@ export class AppContentPage implements OnInit {
          } else {
             if (this.appName == 'Samiksha') {
                this.showSkeleton = true;
-               this.getRoles();
+               if (navigator.onLine) {
+                  this.getRoles();
+               } else {
+                  this.errorMessage('Check your internet connection.');
+               }
             }
             this.title = this.appName + ' ' + 'Dashboard';
          }
@@ -65,11 +70,11 @@ export class AppContentPage implements OnInit {
                   this.showSkeleton = true;
                   this.appContentService.getRoles(userTokens.access_token).subscribe((data: any) => {
                      this.showSkeleton = false;
-                     if (data.result) {
+                     if (data.result.length > 0) {
                         this.roles = data.result;
-                        //  this.showNoMsgCard = false;
+                        this.showNoMsgCard = false;
                      } else {
-                        //  this.showNoMsgCard = true;
+                        this.showNoMsgCard = true;
                      }
                      this.showSkeleton = false;
                   }, error => {
@@ -83,17 +88,5 @@ export class AppContentPage implements OnInit {
       })
    }
 
-   // get entity list
-   public getEntityList(id, type, group) {
-      console.log(id, type, group, "type");
-      if (group[0]) {
-         console.log("in if");
-         console.log(id, type, group, "type 11");
-         this.router.navigate(['/entities', id, type, group[0]]);
-      } else { 
-         group[0] ='';
-         console.log("in if else");
-         console.log(id, type, group, "type 222");
-         this.router.navigate(['/programs', id, type, group[0]]); }
-   }
+ 
 }

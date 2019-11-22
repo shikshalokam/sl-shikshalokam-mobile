@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button auto-hide="false"> </ion-back-button>
+    </ion-buttons>
+    <ion-title>Roles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!roles" class="no-data-found">
+    {{ "messages.no_data_found" | translate }}
+  </div>
+  <div *ngIf="roles">
+    <div *ngFor="let role of roles.roles">
+      <ion-card
+        style="padding:15px;"
+        *ngFor="let entity of role.entities"
+        (click)="
+          getEntityList(entity._id, entity.entityType, entity.subEntityGroups)
+        "
+      >
+        {{ entity.name }}
+        <ion-icon style="float:right" name="arrow-forward"></ion-icon>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

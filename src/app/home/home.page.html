@@ -4,58 +4,66 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      ShikshaLokam
+      {{ "messages.welcome_note" | translate }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content style="--background: #e0e0e0;">
-  <div class="welcome-note">
-    <h4 color="primary">Welcome to Shikshalokam App!</h4>
-  </div>
+<ion-content style="--background: #fff;">
+  <div padding style="padding: 18px 30px;">
+    <div class="welcome-note">
+      <h3 color="primary">{{ "home_page.my_apps" | translate }}</h3>
+    </div>
+    <!-- <ion-button (click)="open()"> Unnati projects </ion-button> -->
+    <!-- Voting  -->
 
-  <!-- <ion-button (click)="open()"> Unnati projects </ion-button> -->
-  <!-- Voting  -->
-
-  <!-- <ion-row style="color:#fff;background: #13b313;
+    <!-- <ion-row style="color:#fff;background: #13b313;
   padding: 5px;" *ngIf="showNotifications" routerLink="/voting">
     <ion-col style="width:90%;">
     You have new Poll. </ion-col>
     <ion-col style="text-align:right;">  <ion-icon name="close" (click)="closeNotification()" ></ion-icon></ion-col>
   </ion-row> -->
-  <!-- App suite -->
-  <!-- <ion-card>
-      <ion-item-group>
-          <ion-item-divider color="light">
-              <h4 class="bold" text-wrap text-capitalize>  App Suite</h4>
-          </ion-item-divider>
-    </ion-item-group>
-    <ion-card-content
-      style="    padding-inline-start: 0px;    padding-inline-end: 0px; padding-bottom:5px;"
-    >
-      <ion-card *ngFor="let application of applications">
-        <ion-grid>
-          <ion-row (click)="openApp(application.id)">
-            <ion-col class="custom-col" style="text-align:left;margin-right: 20px;">
-              <img src="{{ application.icon }}" />
-            </ion-col>
-            <ion-col>
-              <ion-card-title>{{ application.title }}</ion-card-title>
-                <ion-card-subtitle> {{ application.subTitle }}</ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-card-content>
+    <!-- App suite -->
+    <!-- <ion-card *ngFor="let application of applications">
+    <ion-row (click)="openApp(application.id)">
+      <ion-col class="custom-col" style="text-align:left;margin-right: 20px;">
+        <img src="{{ application.icon }}" />
+      </ion-col>
+      <ion-col class="app-title">
+        {{ application.title }}
+      </ion-col>
+    </ion-row>
   </ion-card> -->
-  <div class="app-suite">
-    <div *ngFor="let application of applications">
-      <ion-grid>
-        <ion-row (click)="openApp(application.id)">
-          <img src="{{ application.icon }}" />
-        </ion-row>
-      </ion-grid>
-    </div>
+    <ion-row
+      *ngFor="let application of applications"
+      class="my-apps-lists"
+      (click)="openApp(application.id)"
+    >
+      <ion-col class="icons"><img src="{{ application.icon }}" /> </ion-col>
+      <ion-col class="titles"
+        ><div>
+          <b>{{ application.title }}</b>
+        </div></ion-col
+      >
+    </ion-row>
   </div>
+  <!-- Dashboard and My journey -->
+  <div class="dasboards">
+    <div class="welcome-note">
+      <h3 color="primary">{{ "home_page.my_activity" | translate }}</h3>
+    </div>
+    <ion-grid style="padding-bottom: 25px;">
+      <ion-row>
+        <ion-col *ngFor="let dashboard of dashboards">
+          <ion-card (click)="navigateToDashboard(dashboard.url)">
+            <ion-card-header>
+              <ion-img src="{{ dashboard.icon }}"></ion-img>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!--   
   <div class="app-suite">
     <ion-grid (click)="navigateToDashboard()">
       <ion-row>
@@ -67,7 +75,7 @@
         <img src="../../assets/images/myJourney-h.png" />
       </ion-row>
     </ion-grid>
-  </div>
+  </div> -->
   <!-- My Journey -->
   <!-- <ion-card>
     <ion-card-header
@@ -145,4 +153,3 @@
     </ion-card-content>
   </ion-card> -->
 </ion-content>
-

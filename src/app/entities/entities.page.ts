@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../api/api';
 import { AppContentService } from '../app-content/app-content.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-entities',
@@ -15,12 +16,16 @@ export class EntitiesPage implements OnInit {
   private skeletons = [{}, {}, {}, {}, {}, {}, {}];
   private entities;
   private showNoMsgCard: boolean = false;
-  constructor(private activatedRouter: ActivatedRoute, private router: Router, private appContentService: AppContentService,
+  constructor(private activatedRouter: ActivatedRoute, public toastController: ToastController, private router: Router, private appContentService: AppContentService,
     private storage: Storage, private api: ApiProvider) {
     activatedRouter.params.subscribe(params => {
       this.params = params;
       this.showSkeleton = true;
-      this.getEntities();
+      if (navigator.onLine) {
+        this.getEntities();
+      } else {
+        this.errorMessage('Check your internet connection.');
+      }
     })
   }
 
@@ -61,9 +66,24 @@ export class EntitiesPage implements OnInit {
 
   // Get program lists based on entities
   public getProgramList(entityId, entityType, immediateSubEntityType) {
-    if (immediateSubEntityType == undefined) {
-      immediateSubEntityType = '';
+    if (navigator.onLine) {
+      if (immediateSubEntityType == undefined) {
+        immediateSubEntityType = '';
+      }
+      this.router.navigate(['/programs', entityId, entityType, immediateSubEntityType])
+    } else {
+      this.errorMessage('Check your internet connection.');
     }
-    this.router.navigate(['/programs', entityId, entityType, immediateSubEntityType])
+
   }
+
+  //  Show error message
+  async errorMessage(msg) {
+    const toast = await this.toastController.create({
+      message: msg, color: 'danger',
+      duration: 2000
+    });
+    toast.present();
+  }
+
 }

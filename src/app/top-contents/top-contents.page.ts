@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as jwt_decode from "jwt-decode";
 import * as Highcharts from 'highcharts/highcharts-gantt';
 import { ProgramsService } from '../programs/programs.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-top-contents',
@@ -33,7 +34,7 @@ export class TopContentsPage implements OnInit {
   private skeletons = [{}, {}, {}, {}, {}, {}, {}];
   private datas;
   highcharts = Highcharts;
-  constructor(private topContentService: TopContentService, private storage: Storage, private api: ApiProvider,
+  constructor(private topContentService: TopContentService, private storage: Storage, private api: ApiProvider,private screenOrientation: ScreenOrientation,
     private programsService: ProgramsService, private activatedRoute: ActivatedRoute) {
     activatedRoute.params.subscribe(params => {
       this.type = params.type;
@@ -49,21 +50,26 @@ export class TopContentsPage implements OnInit {
     this.showChart = false;
     this.showNoMsgCard = false;
     this.getCurrentMonth();
-    if (this.type == "topContents") {
-      this.showSkeleton = true;
-      this.getTopViewedContents();
-    } else if (this.type == "downloads") {
-      this.showSkeleton = true;
-      this.getDownloadedContent();
-    } else if (this.type == "courses") {
-      this.showSkeleton = true;
-      this.getEnrolledCourses();
-    } else if (this.type == "contents") {
-      this.showSkeleton = true;
-      this.getUsageByContent();
-    } else if (this.type = "samiksha") {
-      this.getReports();
+    this.getTopViewedContents();
+    try {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    } catch (error) {
     }
+    // if (this.type == "topContents") {
+    //   this.showSkeleton = true;
+    //   this.getTopViewedContents();
+    // } else if (this.type == "downloads") {
+    //   this.showSkeleton = true;
+    //   this.getDownloadedContent();
+    // } else if (this.type == "courses") {
+    //   this.showSkeleton = true;
+    //   this.getEnrolledCourses();
+    // } else if (this.type == "contents") {
+    //   this.showSkeleton = true;
+    //   this.getUsageByContent();
+    // } else if (this.type = "samiksha") {
+    //   this.getReports();
+    // }
 
   }
   ngOnInit() {
@@ -72,7 +78,7 @@ export class TopContentsPage implements OnInit {
   // get current month
   public getCurrentMonth() {
     let date = new Date();
-    this.currentMonth = this.monthNames[date.getMonth()];
+    this.currentMonth = this.monthNames[date.getMonth() - 1];
   }
 
   // get top viewed content
@@ -92,6 +98,8 @@ export class TopContentsPage implements OnInit {
               this.showSkeleton = false;
               if (data.result && data.data.length > 0) {
                 this.usageContents = data.data;
+                console.log(this.usageContents);
+                console.log(this.usageContents.COUNT, this.usageContents);
                 this.setupChart();
                 this.showNoMsgCard = false;
               } else {

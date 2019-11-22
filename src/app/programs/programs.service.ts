@@ -25,7 +25,7 @@ export class ProgramsService {
             'x-auth-token': token,
             'x-authenticated-user-token': token
         })
-        return this.http.get(AppConfigs.api_url + '/assessment-service/api/v1/entities/list/' + values.id + '?type=' + values.type, { headers: httpHeaders })
+        return this.http.get(AppConfigs.api_url + '/assessment/api/v1/entities/list/' + values.id + '?type=' + values.type, { headers: httpHeaders })
     }
     //  get reports
     public getReports(token, value) {

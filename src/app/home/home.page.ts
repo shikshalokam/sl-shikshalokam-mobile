@@ -6,8 +6,6 @@ import { ToastController } from '@ionic/angular';
 import { Login } from '../login.service';
 import { AppConfigs } from "../app.config";
 import { Storage } from '@ionic/storage';
-
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,16 +19,16 @@ export class HomePage implements OnInit {
   private logout_url: string;
   private auth_url: string;
   private base_url: string;
-  private dashboard = [{
-    name: 'Learning',
-    id: 2,
-    //url:'',
-  },
-  {
-    name: 'Unnati',
-    id: 3,
-    //url:'',
-  }];
+  private dashboards = [
+    {
+      icon: '/assets/images/dash-small@3x.png',
+      url: 'dash'
+    },
+    {
+      icon: '/assets/images/journey-small@3x.png',
+      url: 'org.shikshalokam.bodh'
+    }
+  ]
   constructor(private appLauncher: AppLauncher, private router: Router, private storage: Storage, public toastController: ToastController, private iab: InAppBrowser, private login: Login, ) {
     //this.token1 =  localStorage.getItem('mayBeToken');
     // this.menuCtrl.enable(true);
@@ -51,19 +49,19 @@ export class HomePage implements OnInit {
       {
         title: 'Experience Personalized Learning',
         appName: 'Bodh',
-        icon: '/assets/images/bodh-h.png',
+        icon: '/assets/images/bodh-d.png',
         id: 'org.shikshalokam.bodh'
       },
       {
         title: 'Identify Areas of Improvement',
         appName: 'Samiksha',
-        icon: '/assets/images/samiksha-h.png',
+        icon: '/assets/images/samiksha-d.png',
         id: 'org.shikshalokam.samiksha'
       },
       {
         title: 'Create and Track Projects',
         appName: 'Unnati',
-        icon: '/assets/images/unnati-h.png',
+        icon: '/assets/images/unnati-d.png',
         id: 'org.shikshalokam.unnati'
       }
     ]
@@ -101,21 +99,23 @@ export class HomePage implements OnInit {
     })
   }
   //  Navigate to dashboard if user logged in otherwise navigate to login
-  public navigateToDashboard() {
-    if (localStorage.getItem("token") != null) {
-      this.router.navigateByUrl('/dashboard-chart');
-    } else {
-      if (navigator.onLine) {
-        // this.router.navigateByUrl('/login');
-        this.doLogin();
+  public navigateToDashboard(url) {
+    if (url == 'dash') {
+      if (localStorage.getItem("token") != null) {
+        this.router.navigateByUrl('/dashboard-chart');
       } else {
-        this.errorMessage('Check your internet Connection.');
+        if (navigator.onLine) {
+          this.doLogin();
+        } else {
+          this.errorMessage('Check your internet Connection.');
+        }
       }
+    } else if (url) {
+      this.errorMessage('Comming soon!');
     }
   }
-  public open()
-  {
-    window.open("unnati://project-view/projects");
+  public open() {
+    window.open("unnati:/about");
   }
 
   // Login
@@ -125,7 +125,7 @@ export class HomePage implements OnInit {
         this.login.checkForCurrentUserLocalData(success1);
         this.storage.set('userTokens', success1).then(data => {
           this.login.loggedIn('true');
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/dashboard-chart');
         });
         localStorage.setItem('token', success1);
         this.login.loggedIn('true');
@@ -169,4 +169,5 @@ export class HomePage implements OnInit {
     });
     toast.present();
   }
+
 }

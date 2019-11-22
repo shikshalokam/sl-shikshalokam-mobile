@@ -5,6 +5,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AlertController } from '@ionic/angular';
 import { Router, UrlTree, UrlSegmentGroup, UrlSegment, PRIMARY_OUTLET } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Location } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -34,13 +36,15 @@ export class AppComponent {
   public isConnected;
   public loggedInUser;
   constructor(
-    private router: Router,
+    private router: Router, private location: Location, private translate: TranslateService,
     //  private fcm: FcmService,
     private platform: Platform, private alertController: AlertController,
     private splashScreen: SplashScreen, private toastController: ToastController,
     private statusBar: StatusBar,
     // public firebaseNative: Firebase
   ) {
+    translate.setDefaultLang('en');
+    translate.use('en');
     this.backButtonEvent();
     statusBar.backgroundColorByHexString('#2693ee');
     statusBar.styleDefault();
@@ -50,6 +54,7 @@ export class AppComponent {
 
   // Initial call
   initializeApp() {
+
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#af4038');
@@ -59,13 +64,18 @@ export class AppComponent {
         const tree: UrlTree = this.router.parseUrl(this.router.url);
         const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
         const s: UrlSegment[] = g.segments;
-        console.log(s, "segment");
         this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
-          console.log("1", this.router.url);
           if (this.router.url == '/app-content/Samiksha' || this.router.url == '/app-content/Bodh' || s[0].path == 'top-contents') {
             await this.router.navigate(['/dashboard-chart']);
           } else if (this.router.url == '/dashboard-chart') {
             await this.router.navigate(['/home']);
+          } else if (s[0].path == 'entities' || s[0].path == 'programs') {
+            await this.router.navigate(['/app-content/Samiksha']);
+          } else if (s[0].path == 'top-contents' && s[3].path == 'samiksha') {
+            this.location.back();
+          }
+          else if (s[0].path == 'top-contents') {
+            await this.router.navigate(['/app-content/Bodh']);
           }
           else if (this.router.url === '/home') {
             if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {

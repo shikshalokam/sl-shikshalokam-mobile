@@ -1,0 +1,24 @@
+<div class="mostviewed-cntn-box" padding>
+  <h4 class="title">
+    {{ "downloads.your_downloadsin_lastmonth" | translate }}
+  </h4>
+  {{ currentMonth }}
+  <div class="horizontal-bar"></div>
+  <div *ngIf="downloads" class="content-box">
+    <ion-card *ngFor="let download of downloads; let i = index">
+      <ion-row>
+        <ion-col class="sr-no">{{ i + 1 }}</ion-col>
+        <ion-col style="padding: 10px;font-size: 20px;margin: auto;">
+          {{ download.content_name }}
+        </ion-col></ion-row
+      >
+      <div class="total-views">
+      {{ "downloads.total_views" | translate }} 6,500
+      </div>
+    </ion-card>
+  </div>
+</div>
+
+<div *ngIf="!downloads" class="no-data-found">
+  {{ "messages.no_data_found" | translate }}
+</div>

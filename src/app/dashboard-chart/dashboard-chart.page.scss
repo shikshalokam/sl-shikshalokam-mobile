@@ -1,4 +1,16 @@
 .sc-ion-card-md-h {
-    border-radius: 30px !important;
-    background: #fff !important;
+  border-radius: 25px !important;
+  background: #fff !important;
+}
+
+ion-img {
+  width: 85%;
+  margin: auto;
+}
+.welcome-note {
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  h3 {
+    margin-bottom: 0px;
   }
+}

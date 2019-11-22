@@ -1,143 +1,24 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button> </ion-back-button>
-    </ion-buttons>
-    <ion-title>Content Data</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <div *ngIf="!showSkeleton">
-    <h4 class="activity-month" padding>My Activity : {{ currentMonth }}</h4>
-    <div class="horizontal-bar"></div>
-    <!-- Viewed content of the month -->
-    <div class="mostviewed-cntn-box" padding *ngIf="type == 'topContents'">
-      <h4 class="title">Most Viewed Content of the Month</h4>
-      <div *ngIf="contents">
-        <ion-card *ngFor="let content of contents; let i = index">
-          {{ i + 1 }}. {{ content.content_name }}</ion-card
-        >
+<!-- Viewed content of the month -->
+<div class="mostviewed-cntn-box" padding>
+  <h4 class="title">
+    {{ "content.your_contentin_lastmonth" | translate }}
+  </h4>
+  {{ currentMonth }}
+  <div class="horizontal-bar"></div>
+  <div *ngIf="contents" class="content-box">
+    <ion-card *ngFor="let content of contents; let i = index">
+      <ion-row>
+        <ion-col class="sr-no">{{ i + 1 }}</ion-col>
+        <ion-col style="padding: 10px;font-size: 20px;margin: auto;">
+          {{ content.content_name }}
+        </ion-col></ion-row
+      >
+      <div class="total-views">
+        {{ "content.total_views" | translate }} {{ content.total_views }}
       </div>
-    </div>
-    <!-- Viewed content of the month ends here-->
-    <!-- Downloads of the month -->
-    <div class="mostviewed-cntn-box" padding *ngIf="type == 'downloads'">
-      <h4 class="title">My Downloads of the Month</h4>
-      <div *ngIf="downloads">
-        <ion-card *ngFor="let download of downloads">
-          {{ i + 1 }}. {{ content.content_name }}</ion-card
-        >
-      </div>
-    </div>
-    <!-- Downloads of the month ends here-->
-    <!-- Downloads of the month -->
-    <div class="mostviewed-cntn-box" padding *ngIf="type == 'courses'">
-      <h4 class="title">Courses enrolled</h4>
-      <div *ngIf="courses">
-        <ion-card> {{ courses }}</ion-card>
-      </div>
-    </div>
-    <!-- Downloads of the month ends here-->
-
-    <!-- usage by content-->
-    <div class="mostviewed-cntn-box" padding *ngIf="type == 'contents'">
-      <h4 class="title">Usage contents</h4>
-      <div *ngIf="chartOptions">
-        <ion-card style="background:#fff; padding: 0px;">
-          <highcharts-chart
-            [Highcharts]="highcharts"
-            [options]="chartOptions"
-            style="width: 100%; height: 400px; display: block;"
-          >
-          </highcharts-chart>
-        </ion-card>
-      </div>
-    </div>
-    <!-- usage by content -->
-
-    <!-- usage by content-->
-    <div class="mostviewed-cntn-box" padding *ngIf="type == 'samiksha'">
-      <h4 class="title"></h4>
-      <div *ngIf="chartObj">
-        <ion-card style="background:#fff; padding: 0px;">
-          <highcharts-chart
-            [Highcharts]="highcharts"
-            [options]="chartObj"
-            style="width: 100%; height: 400px; display: block;"
-          >
-          </highcharts-chart>
-        </ion-card>
-      </div>
-      <div>
-        <ion-card class="custom-card">
-          <h5 *ngIf="datas?.chart" padding-left padding-right padding-top>
-            {{ datas?.chart?.title }}
-          </h5>
-          <div *ngIf="datas?.chart">
-            <div *ngFor="let entity of datas?.chart?.entities">
-              <h4 text-wrap margin-left margin-top>{{ entity.entityName }}</h4>
-
-              <ion-card 
-                padding
-                (click)="isOpenIndex = isOpenIndex == i ? -1 : i"
-                class="expansionPanel custom-card"
-                margin
-                *ngFor="let item of entity?.domains; let i = index"
-              >
-                <div class="_flex-box _justify-content-space-between">
-                  <div style="flex: 1;width: 90%; float: left;" text-wrap>{{ item?.domainName }}</div>
-                  <ion-icon
-                    *ngIf="!(isOpenIndex == i)"
-                    name="arrow-down"
-                    padding-left
-                    padding-right style="
-                    font-size: 20px;"
-                  ></ion-icon>
-                  <ion-icon style="font-size: 20px;"
-                    *ngIf="isOpenIndex == i"
-                    name="arrow-up"
-                    padding-left
-                    padding-right
-                  ></ion-icon>
-                </div>
-                <div *ngIf="isOpenIndex == i" padding>
-                  <table>
-                    <tr
-                      *ngFor="let criteria of item.criterias"
-                      class="_flex-box _justify-content-space-between _noWrap"
-                    >
-                      <td text-wrap style="flex: 1">{{ criteria?.name }}</td>
-                      <td class="_flex-box">: {{ criteria?.level }}</td>
-                    </tr>
-                  </table>
-                </div>
-              </ion-card>
-            </div>
-          </div>
-        </ion-card>
-      </div>
-    </div>
-    <!-- usage by content -->
+    </ion-card>
   </div>
-  <!-- skeleton / loader -->
-  <div *ngIf="showSkeleton">
-    <div class="skeleton-card-content">
-      <ion-card *ngFor="let skeleton of skeletons">
-        <ion-card-content class="skeleton-card-content">
-          <p>
-            <ion-skeleton-text animated></ion-skeleton-text>
-            <ion-skeleton-text animated></ion-skeleton-text>
-            <ion-skeleton-text animated></ion-skeleton-text
-            ><ion-skeleton-text animated></ion-skeleton-text>
-            <ion-skeleton-text animated></ion-skeleton-text>
-          </p>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
-  <!-- skeleton / loader ends here-->
-  <!-- print message if no data -->
-  <div *ngIf="showNoMsgCard">
-    <ion-card class="no-data-msg"> <h5>No Data available.</h5></ion-card>
-  </div>
-</ion-content>
+</div>
+<div *ngIf="!contents" class="no-data-found">
+  {{ "messages.no_data_found" | translate }}
+</div>

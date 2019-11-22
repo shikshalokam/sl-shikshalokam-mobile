@@ -17,7 +17,6 @@ import { AppLauncher, AppLauncherOptions } from '@ionic-native/app-launcher/ngx'
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ApiProvider } from '../app/api/api';
 import {CurrentUserProvider} from './current-user';
-
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

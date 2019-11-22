@@ -6,7 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TopContentsPage } from './top-contents.page';
-import { HighchartsChartComponent } from 'highcharts-angular';
+//import { HighchartsChartComponent } from 'highcharts-angular';
+import { SharedModule } from '.././shared.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 const routes: Routes = [
   {
@@ -17,11 +20,13 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule, SharedModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
   ],
-  declarations: [TopContentsPage,HighchartsChartComponent]
+  declarations: [TopContentsPage],
+  providers: [ScreenOrientation]
 })
-export class TopContentsPageModule {}
+export class TopContentsPageModule { }
