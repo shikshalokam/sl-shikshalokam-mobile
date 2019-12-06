@@ -26,7 +26,7 @@ export class DashboardChartPage implements OnInit {
     {
       title: 'Create and Track Projects',
       appName: 'Unnati',
-      icon: '/assets/images/unnati-d.png',
+      icon: '/assets/images/unnati-small@3x.png',
       id: 'org.shikshalokam.unnati'
     }
   ]
