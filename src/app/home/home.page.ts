@@ -61,7 +61,7 @@ export class HomePage implements OnInit {
       {
         title: 'Create and Track Projects',
         appName: 'Unnati',
-        icon: '/assets/images/unnati-d.png',
+        icon: '/assets/images/unnati-small@2x.png',
         id: 'org.shikshalokam.unnati'
       }
     ]
