@@ -68,35 +68,6 @@ export class ProgramsPage implements OnInit {
     } else {
       this.errorMessage('Check your internet connection.');
     }
-    // this.storage.get('userTokens').then(data => {
-    //   this.api.refershToken(data.refresh_token).subscribe((data: any) => {
-    //     let parsedData = JSON.parse(data._body);
-    //     if (parsedData && parsedData.access_token) {
-    //       let userTokens = {
-    //         access_token: parsedData.access_token,
-    //         refresh_token: parsedData.refresh_token,
-    //       };
-    //       this.storage.set('userTokens', userTokens).then(usertoken => {
-    //         this.showSkeleton = true;
-    //         this.programsService.getReports(userTokens.access_token,programId,solutionId,this.parameters).subscribe((data: any) => {
-    //           this.showSkeleton = false;
-    //           console.log(data, "data");
-    //           if (data.reportSections) {
-    //             this.reports = data;
-    //             this.showNoMsgCard = false;
-    //           } else {
-    //             //  this.showNoMsgCard = true;
-    //           }
-    //           this.showSkeleton = false;
-    //         }, error => {
-    //           this.showSkeleton = false;
-    //         })
-    //       }, error => {
-    //         this.showSkeleton = false;
-    //       })
-    //     }
-    //   })
-    // })
   }
 
   public getEntities() {

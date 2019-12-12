@@ -61,7 +61,7 @@ export class HomePage implements OnInit {
       {
         title: 'Create and Track Projects',
         appName: 'Unnati',
-        icon: '/assets/images/unnati-small@2x.png',
+        icon: '/assets/images/unnati-small@3x.png', 
         id: 'org.shikshalokam.unnati'
       }
     ]
@@ -111,7 +111,7 @@ export class HomePage implements OnInit {
         }
       }
     } else if (url) {
-      this.errorMessage('Comming soon!');
+      this.errorMessage('Coming Soon!');
     }
   }
   public open() {
@@ -169,5 +169,4 @@ export class HomePage implements OnInit {
     });
     toast.present();
   }
-
 }

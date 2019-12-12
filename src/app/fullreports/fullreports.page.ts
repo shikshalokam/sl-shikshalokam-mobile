@@ -18,11 +18,10 @@ export class FullreportsPage implements OnInit {
   highcharts = Highcharts;
   public showCharts: boolean = false;
   public chartOptions;
-  private showSkeleton: boolean = false;
-  private skeleton = [{}]
+  private showSkeleton: boolean = true;
+  private skeletons = [{}, {}, {}, {}, {}]
   constructor(private activatedRoute: ActivatedRoute, private screenOrientation: ScreenOrientation, private router: Router, private myReportsService: UnnatiDashboardService, private api: ApiProvider, private storage: Storage) {
     activatedRoute.params.subscribe((params: any) => {
-      console.log(params.state, "params.state");
       this.state = params.state;
       this.getReports(params.state);
       try {
@@ -43,66 +42,16 @@ export class FullreportsPage implements OnInit {
             access_token: parsedData.access_token,
             refresh_token: parsedData.refresh_token,
           };
-          this.showSkeleton = true;
           this.storage.set('userTokens', userTokens).then(usertoken => {
             this.myReportsService.getFullReports(userTokens.access_token, state).subscribe((data: any) => {
-              data.data.forEach(report => {
-                console.log(report, "report");
-
-              });
               this.reports = data.data;
               if (this.reports.length > 0) {
-
                 setTimeout(() => {
-                  this.showCharts = true;
                   this.setUpChart(this.reports[0]);
-                }, 1000);
+                }, 900);
               } else {
                 this.showSkeleton = false;
               }
-
-              // this.chartOptions = {
-              //   // title: this.reports[0].title,
-              //   // series:  this.reports[0].series[0],
-              //   // xAxis:  this.reports[0].xAxis
-              //   chart:{
-              //     type:'gantt'
-              //   },
-              //   title: {
-              //     text: 'Gantt Chart with Progress Indicators'
-              // },
-              // xAxis: {
-              //     min: Date.UTC(2014, 10, 17),
-              //     max: Date.UTC(2014, 10, 30)
-              // },
-
-              // series: [{
-              //     name: 'Project 1',
-              //     type:'gantt',
-              //     data: [{
-              //         name: 'Start prototype',
-              //         start: Date.UTC(2014, 10, 18),
-              //         end: Date.UTC(2014, 10, 25),
-              //         completed: 0.25
-              //     }, {
-              //         name: 'Test prototype',
-              //         start: Date.UTC(2014, 10, 27),
-              //         end: Date.UTC(2014, 10, 29)
-              //     }, {
-              //         name: 'Develop',
-              //         start: Date.UTC(2014, 10, 20),
-              //         end: Date.UTC(2014, 10, 25),
-              //         completed: {
-              //             amount: 0.12,
-              //             fill: '#fa0'
-              //         }
-              //     }, {
-              //         name: 'Run acceptance tests',
-              //         start: Date.UTC(2014, 10, 23),
-              //         end: Date.UTC(2014, 10, 26)
-              //     }]
-              // }]
-              // }
             }, error => {
               this.showSkeleton = false;
             })
@@ -110,26 +59,16 @@ export class FullreportsPage implements OnInit {
             this.showSkeleton = false;
           })
         }
+      }, error => {
+        this.showSkeleton = false;
       })
+    }, error => {
+      this.showSkeleton = false;
     })
   }
   public setUpChart(data) {
+    this.showCharts = true;
     this.showSkeleton = false;
-    // console.log(data, "data");
-    // Highcharts.ganttChart('container', {
-    //   title: {
-    //     text: data.title.text
-    //   },
-    //   xAxis: {
-    //     min: data.xAxis.min,
-    //     max: data.xAxis.max
-    //   },
-
-    //   series: [{
-    //     type: 'gantt',
-    //     data: data.series[0].data
-    //   }]
-    // });
     for (let i = 0; i <= this.reports.length; i++) {
       let minDate = new Date(this.reports[i].xAxis.min);
       let maxDate = new Date(this.reports[i].xAxis.max);
@@ -140,12 +79,6 @@ export class FullreportsPage implements OnInit {
       let emonth = maxDate.getMonth();
       let eyear = maxDate.getFullYear();
       Highcharts.ganttChart('container' + i, {
-        // chart: {
-        //   scrollablePlotArea: {
-        //     minWidth: 300,
-        //     scrollPositionX: 1
-        //   }
-        // },
         title: {
           text: ''
         },

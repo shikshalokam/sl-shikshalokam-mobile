@@ -83,7 +83,6 @@ export class TopContentsPage implements OnInit {
 
   // get top viewed content
   public getUsageByContent() {
-    console.log('dfddf');
     this.storage.get('userTokens').then(data => {
       this.api.refershToken(data.refresh_token).subscribe((data: any) => {
         let parsedData = JSON.parse(data._body);
@@ -98,8 +97,6 @@ export class TopContentsPage implements OnInit {
               this.showSkeleton = false;
               if (data.result && data.data.length > 0) {
                 this.usageContents = data.data;
-                console.log(this.usageContents);
-                console.log(this.usageContents.COUNT, this.usageContents);
                 this.setupChart();
                 this.showNoMsgCard = false;
               } else {

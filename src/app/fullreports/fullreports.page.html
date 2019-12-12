@@ -10,47 +10,40 @@
 </ion-header>
 
 <ion-content padding>
+  <div *ngIf="showSkeleton">
+    <div class="skeleton-card-content">
+      <ion-card *ngFor="let skeleton of skeletons">
+        <ion-card-content class="skeleton-card-content">
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
   <h5 *ngIf="state == 'latsMonth'">
     {{ "fullreports.undertaken_prjcts_inmonth" | translate }}
   </h5>
   <h5 *ngIf="state == 'lastQuarter'">
     {{ "fullreports.undertaken_prjcts_inqrtr" | translate }}
   </h5>
-  <!-- <ion-card *ngFor="let report of reports; let i = index">
-    <ion-card-header>
+  <ion-card *ngFor="let report of reports; let i = index" style="background: #f5f5f5b8;
+    border-radius: 10px;">
+    <ion-card-header class="chart-title">
       {{ report.title.text }}
     </ion-card-header>
-  </ion-card> -->
-  <!-- <div >
-    <ion-card>
-      <ion-card-header> Project Name </ion-card-header>
-      <ion-card-content id="container0"> </ion-card-content>
-    </ion-card>
-    <ion-card id="container1"></ion-card>
-    <ion-card id="container2"></ion-card>
-    <ion-card id="container3"></ion-card>
-    <ion-card id="container4"></ion-card>
-    <ion-card id="container5"></ion-card>
-    <ion-card id="container6"></ion-card>
-    <ion-card id="container7"></ion-card>
-    <ion-card id="container8"></ion-card>
-    <ion-card id="container9"></ion-card>
-  </div> -->
-
-  <div>
-    <ion-card
-      *ngFor="let report of reports; let i = index"
-      style="background: #f5f5f5b8;
-    border-radius: 10px;"
-    >
-      <ion-card-header class="chart-title">
-        {{ report.title.text }}
-      </ion-card-header>
-      <ion-card-content>
-        <div id="{{ idvalue }}{{ i }}"></div>
-      </ion-card-content>
-    </ion-card>
-  </div>
+    <ion-card-content>
+      <div id="{{ idvalue }}{{ i }}"></div>
+    </ion-card-content>
+  </ion-card>
   <!-- <div *ngIf="chartOptions">
     <highcharts-chart
       [Highcharts]="highcharts"
@@ -59,30 +52,5 @@
     >
     </highcharts-chart>
   </div> -->
-  <div *ngIf="showSkeleton">
-    <ion-card>
-      <ion-card-content class="skeleton-card-content">
-        <ion-card *ngFor="let skeleton of skeletons">
-          <ion-card-content class="skeleton-card-content">
-            <p>
-              <ion-skeleton-text
-                animated
-                style=" width: 48%;
-                        float: left;height: 200px;
-                        margin-left: 2%;"
-              ></ion-skeleton-text>
-              <ion-skeleton-text
-                animated
-                animated
-                style=" width: 48%;
-                        float: left;
-                        margin-left: 2%;height: 200px;"
-              ></ion-skeleton-text>
-              <ion-skeleton-text animated></ion-skeleton-text>
-            </p>
-          </ion-card-content>
-        </ion-card>
-      </ion-card-content>
-    </ion-card>
-  </div>
+
 </ion-content>

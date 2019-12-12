@@ -26,15 +26,11 @@ export class DashboardChartPage implements OnInit {
     {
       title: 'Create and Track Projects',
       appName: 'Unnati',
-      icon: '/assets/images/unnati-small@2x.png',
+      icon: '/assets/images/unnati-small@3x.png',
       id: 'org.shikshalokam.unnati'
     }
   ]
   constructor(private activeRouter: ActivatedRoute, private router: Router, public toastController: ToastController, private screenOrientation: ScreenOrientation, ) {
-    // this.router.params.subscribe(params => {
-    //   console.log(params.id, "Params");
-    //   this.id = params.id;
-    // })
   }
 
   ngOnInit() {
@@ -48,9 +44,7 @@ export class DashboardChartPage implements OnInit {
   // Navigating to content screen with appname 
   // Based on appname, we monitoring different types of data.  
   public navigateToContent(appname) {
-    console.log(navigator.onLine, "navigator.onLine");
     if (navigator.onLine) {
-      console.log(navigator.onLine, "navigator.onLine 1");
       if (appname == 'Bodh') {
         this.router.navigate(['/bodh-dashboard/top-contents']);
       } else if (appname == 'Samiksha') {
@@ -70,4 +64,5 @@ export class DashboardChartPage implements OnInit {
     });
     toast.present();
   }
+ 
 }

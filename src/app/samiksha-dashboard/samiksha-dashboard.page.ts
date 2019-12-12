@@ -92,17 +92,4 @@ export class SamikshaDashboardPage implements OnInit {
     this.datas = this.reports.reportSections[1];
 
   }
- // get entity list
-//  public getEntityList(id, type, group) {
-//     console.log(id, type, group, "type");
-//     if (group[0]) {
-//        console.log("in if");
-//        console.log(id, type, group, "type 11");
-//        this.router.navigate(['/entities', id, type, group[0]]);
-//     } else { 
-//        group[0] ='';
-//        console.log("in if else");
-//        console.log(id, type, group, "type 222");
-//        this.router.navigate(['/programs', id, type, group[0]]); }
-//  }
 }

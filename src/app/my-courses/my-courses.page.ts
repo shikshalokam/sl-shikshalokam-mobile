@@ -104,8 +104,6 @@ export class MyCoursesPage implements OnInit {
     })
   }
   public setupChart(preparedJson) {
-    console.log(this.preparedJson, "this.prepared json");
-    console.log(preparedJson, "prepared json");
     Highcharts.chart('container', {
       chart: {
         type: 'bar',
@@ -156,6 +154,5 @@ export class MyCoursesPage implements OnInit {
   public getLastMonth() {
     let date = new Date();
     this.lastMonth = this.monthNames[date.getMonth() - 1];
-    console.log(this.lastMonth, " lastMonth");
   }
 }

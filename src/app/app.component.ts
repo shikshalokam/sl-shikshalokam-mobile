@@ -103,8 +103,6 @@ export class AppComponent {
 
 
   backButtonEvent() {
-    console.log("back pressed");
-
   }
 
 

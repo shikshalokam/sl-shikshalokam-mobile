@@ -15,9 +15,10 @@ export class LastQuarterReportsPage implements OnInit {
   private chartOptions;
   private showChart: boolean = false;
   private report;
-  private showSkeleton: boolean = false;
+  private showSkeleton: boolean = true;
   private skeletons = [{}, {}, {}, {}, {}]
   highcharts = Highcharts;
+  respStatus;
   constructor(private unnatiDashboardService: UnnatiDashboardService, private router: Router, private toastController: ToastController, private api: ApiProvider, private storage: Storage) { }
 
   ngOnInit() {
@@ -48,14 +49,16 @@ export class LastQuarterReportsPage implements OnInit {
           this.storage.set('userTokens', userTokens).then(usertoken => {
             this.unnatiDashboardService.getReports(userTokens.access_token, 'lastQuarter').subscribe((data: any) => {
               this.report = data.data;
+              this.respStatus = data.status;
               if (this.report && data.status != 'failed') {
                 this.setupChart();
               }
               this.showSkeleton = false;
+            }, error => {
+              this.showSkeleton = false;
             })
           }, error => {
             this.showSkeleton = false;
-            console.log(error, 'dddd');
           })
         }
       }, error => {
@@ -121,5 +124,4 @@ export class LastQuarterReportsPage implements OnInit {
     });
     toast.present();
   }
-
 }
