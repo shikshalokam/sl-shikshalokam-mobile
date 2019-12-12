@@ -1,5 +1,12 @@
 <ion-content padding>
-  <div *ngIf="report">
+    <div *ngIf="report && respStatus =='failed'">
+    <ion-card>
+      <ion-card-content>
+        <h4>No data found</h4>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="report && respStatus =='success'">
     <h5>
       {{ "last_quarter_report.projects_cmpltd_lstqrtr" | translate }}
     </h5>

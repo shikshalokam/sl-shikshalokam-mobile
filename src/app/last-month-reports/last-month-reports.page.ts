@@ -16,7 +16,8 @@ export class LastMonthReportsPage implements OnInit {
   private showChart: boolean = false;
   private report;
   private chartOptions;
-  private showSkeleton: boolean = false;
+  private showSkeleton: boolean = true;
+  respStatus;
   private skeletons = [{}, {}, {}, {}, {}];
   highcharts = Highcharts;
   constructor(private unnatiDashboardService: UnnatiDashboardService, private router: Router, public toastController: ToastController, private api: ApiProvider, private storage: Storage) { }
@@ -43,15 +44,16 @@ export class LastMonthReportsPage implements OnInit {
           this.storage.set('userTokens', userTokens).then(usertoken => {
             this.unnatiDashboardService.getReports(userTokens.access_token, 'lastMonth').subscribe((data: any) => {
               this.report = data.data;
-              console.log(this.report, this.report.length, "this.report");
+              this.respStatus = data.status;
               if (this.report && data.status != 'failed') {
                 this.setupChart();
               }
               this.showSkeleton = false;
+            }, error => {
+              this.showSkeleton = false;
             })
           }, error => {
             this.showSkeleton = false;
-            console.log(error, 'dddd');
           })
         }
       }, error => {
@@ -110,7 +112,6 @@ export class LastMonthReportsPage implements OnInit {
   }
 
   public viewFullReport(value) {
-    console.log(value);
     if (navigator.onLine) {
       this.router.navigate(['/fullreports', value]);
     } else {

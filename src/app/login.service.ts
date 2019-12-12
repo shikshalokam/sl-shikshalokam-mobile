@@ -50,7 +50,6 @@ export class Login {
     });
   }
 
-
   public loggedIn(user) {
     this.emit.next(user);
   }

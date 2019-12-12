@@ -8,31 +8,11 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content style="--background: #fff;">
-  <div padding style="padding: 18px 30px;">
+<ion-content style="--background: #eae7e7;">
+  <div class="apps-container">
     <div class="welcome-note">
       <h3 color="primary">{{ "home_page.my_apps" | translate }}</h3>
     </div>
-    <!-- <ion-button (click)="open()"> Unnati projects </ion-button> -->
-    <!-- Voting  -->
-
-    <!-- <ion-row style="color:#fff;background: #13b313;
-  padding: 5px;" *ngIf="showNotifications" routerLink="/voting">
-    <ion-col style="width:90%;">
-    You have new Poll. </ion-col>
-    <ion-col style="text-align:right;">  <ion-icon name="close" (click)="closeNotification()" ></ion-icon></ion-col>
-  </ion-row> -->
-    <!-- App suite -->
-    <!-- <ion-card *ngFor="let application of applications">
-    <ion-row (click)="openApp(application.id)">
-      <ion-col class="custom-col" style="text-align:left;margin-right: 20px;">
-        <img src="{{ application.icon }}" />
-      </ion-col>
-      <ion-col class="app-title">
-        {{ application.title }}
-      </ion-col>
-    </ion-row>
-  </ion-card> -->
     <ion-row
       *ngFor="let application of applications"
       class="my-apps-lists"
@@ -63,93 +43,4 @@
       </ion-row>
     </ion-grid>
   </div>
-  <!--   
-  <div class="app-suite">
-    <ion-grid (click)="navigateToDashboard()">
-      <ion-row>
-        <img src="../../assets/images/dashboard-h.png" />
-      </ion-row>
-    </ion-grid>
-    <ion-grid>
-      <ion-row>
-        <img src="../../assets/images/myJourney-h.png" />
-      </ion-row>
-    </ion-grid>
-  </div> -->
-  <!-- My Journey -->
-  <!-- <ion-card>
-    <ion-card-header
-      style="background-color: #e6e4e4; padding: 10px 5px 10px 10px;"
-    >
-      <h2
-        style="    margin-top: 0px;
-        font-size: 18px;
-        margin-bottom: 0px;"
-      >
-        My Journey
-      </h2>
-    </ion-card-header>
-    <ion-card-content  style="    padding-inline-start: 0px;    padding-inline-end: 0px; padding-bottom:5px;">
-      <ion-card>
-        <ion-grid>
-          <ion-row routerLink="/my-journey">
-            <ion-col style="min-width:90%; max-width: 90%;">
-              View Journey
-            </ion-col>
-            <ion-col> <ion-icon name="arrow-forward"></ion-icon> </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-card-content>
-  </ion-card> -->
-
-  <!-- Dashbaord -->
-
-  <!-- <ion-card>
-    <ion-card-header
-      style="background-color: #e6e4e4; padding: 10px 5px 10px 10px;"
-    >
-      <h2
-        style="    margin-top: 0px;
-        font-size: 18px;
-        margin-bottom: 0px;"
-      >
-        My Dashboard
-      </h2>
-    </ion-card-header>
-    <ion-card-content
-      style="    padding-inline-start: 0px;    padding-inline-end: 0px; padding-bottom:5px;"
-    >
-    <ion-card >
-        <ion-grid>
-          <ion-row [routerLink]="['/assesment-chart']">
-            <ion-col style="min-width:90%; max-width: 90%;">
-             Assesments
-            </ion-col>
-            <ion-col> <ion-icon name="arrow-forward"></ion-icon> </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card >
-          <ion-grid>
-            <ion-row [routerLink]="['/learning-chart']">
-              <ion-col style="min-width:90%; max-width: 90%;">
-             Learning
-              </ion-col>
-              <ion-col> <ion-icon name="arrow-forward"></ion-icon> </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
-        <ion-card >
-            <ion-grid>
-              <ion-row [routerLink]="['/dashboard-chart']">
-                <ion-col style="min-width:90%; max-width: 90%;">
-                 Unnati
-                </ion-col>
-                <ion-col> <ion-icon name="arrow-forward"></ion-icon> </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card>
-    </ion-card-content>
-  </ion-card> -->
 </ion-content>

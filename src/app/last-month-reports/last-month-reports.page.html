@@ -1,5 +1,12 @@
 <ion-content padding>
-  <div *ngIf="report">
+  <div *ngIf="report && respStatus =='failed'">
+    <ion-card>
+      <ion-card-content>
+        <h4>No data found</h4>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="report && respStatus =='success'">
     <h5>
       {{ "last_month_report.projects_cmpltd_lstmnth" | translate }}
     </h5>
@@ -9,8 +16,8 @@
         <ion-col class="status-card task-completed-box">
           <h3>{{ "last_month_report.completed" | translate }}</h3>
           <h1>
-            <span  *ngIf="report.completed <= 9"> 0{{ report.completed }} &nbsp;</span>
-            <span  *ngIf="report.completed >= 10"> {{ report.completed }} &nbsp;</span>
+            <span *ngIf="report.completed <= 9"> 0{{ report.completed }} &nbsp;</span>
+            <span *ngIf="report.completed >= 10"> {{ report.completed }} &nbsp;</span>
           </h1>
         </ion-col>
         <ion-col class="status-card task-pending-box">
@@ -23,8 +30,8 @@
       </ion-row>
     </ion-grid>
     <div class="action-item" (click)="viewFullReport('lastMonth')">
-        {{ "last_month_report.view_full_reports" | translate }}
-      </div>
+      {{ "last_month_report.view_full_reports" | translate }}
+    </div>
     <!-- <div class="action-item"></div> -->
     <div *ngIf="chartOptions">
       <h5>
@@ -32,11 +39,8 @@
       </h5>
       {{ report.startMonth }}
       <div>
-        <highcharts-chart
-          [Highcharts]="highcharts"
-          [options]="chartOptions"
-          style="width: 100%; height: 400px; display: block;"
-        >
+        <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions"
+          style="width: 100%; height: 400px; display: block;">
         </highcharts-chart>
       </div>
       <ion-row>
@@ -55,7 +59,9 @@
     <div class="skeleton-card-content">
       <ion-card *ngFor="let skeleton of skeletons">
         <ion-card-content class="skeleton-card-content">
-          <p><ion-skeleton-text animated></ion-skeleton-text></p>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
           <p>
             <ion-skeleton-text animated></ion-skeleton-text>
             <ion-skeleton-text animated></ion-skeleton-text>

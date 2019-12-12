@@ -50,7 +50,6 @@ export class EntitiesPage implements OnInit {
                 this.showNoMsgCard = false;
               } else {
                 this.showNoMsgCard = true;
-                console.log("safdsf");
               }
               this.showSkeleton = false;
             }, error => {

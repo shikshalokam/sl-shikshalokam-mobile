@@ -18,22 +18,6 @@ export class CurrentUserProvider {
   }
 
   setCurrentUserDetails(userTokens): void {
-    // let userDetails = jwt_decode(userTokens.accessToken);
-    // let userId = userDetails.sub;
-    // this.sqlite.create({
-    //   name: userId+'.db',
-    //   location: 'default'
-    // }).then((db: SQLiteObject) => {
-    //     db.executeSql('CREATE TABLE IF NOT EXIST session(rowId INTEGER PRIMARY KEY, idToken TEXT, accessToken TEXT, refreshToken TEXT)')
-    //       .then(() => {
-    //         db.executeSql('INSERT INTO session (idToken, accessToken, refreshToken) VALUES (userDetails.idToken, userDetails.accessToken, userDetails.refreshToken)')
-    //         .then(()=>{
-    //           console.log("user data added");
-    //         })
-    //       })
-    //       .catch(e => console.log(e));
-    //   })
-    //   .catch(e => console.log(e));
     this.curretUser = userTokens;
     this.storage.set('tokens', JSON.stringify(userTokens));
   }
