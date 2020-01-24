@@ -13,29 +13,21 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
   styleUrls: ['./my-downloads.page.scss'],
 })
 export class MyDownloadsPage implements OnInit {
-  private monthNames = ["January", "February", "March", "April", "May", "June",
+  monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  private showNoMsgCard;
-  private type;
-  private showChart: boolean = false;
-  private currentMonth;
-  private showSkeleton: boolean = true;
-  private contents;
-  private downloads;
-  private courses;
-  private usageContents;
-  private reports;
-  private parameters;
+  type;
+  showChart: boolean = false;
+  currentMonth;
+  showSkeleton: boolean = true;
+  downloads;
   chartOptions;
   chartObj;
   chartObj1;
-  private skeletons = [{}, {}, {}, {}, {}, {}, {}];
-  private datas;
+  skeletons = [{}, {}, {}, {}, {}, {}, {}];
   highcharts = Highcharts;
   constructor(private topContentService: TopContentService, private storage: Storage, private api: ApiProvider, private screenOrientation: ScreenOrientation,
     private programsService: ProgramsService, private activatedRoute: ActivatedRoute) { }
-
   ngOnInit() {
     this.getCurrentMonth();
     this.getDownloadedContent();
@@ -60,11 +52,9 @@ export class MyDownloadsPage implements OnInit {
             let userDetails: any = jwt_decode(usertoken.access_token);
             this.showSkeleton = true;
             this.topContentService.getDownloadedContent(userTokens.access_token, userDetails.sub).subscribe((data: any) => {
+              console.log(data,"downloads");
               if (data.result && data.data.length > 0) {
                 this.downloads = data.data;
-                this.showNoMsgCard = false;
-              } else {
-                this.showNoMsgCard = true;
               }
               this.showSkeleton = false;
             }, error => {

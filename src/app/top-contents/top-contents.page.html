@@ -1,24 +1,26 @@
 <!-- Viewed content of the month -->
-<div class="mostviewed-cntn-box" padding>
-  <h4 class="title">
-    {{ "content.your_contentin_lastmonth" | translate }}
-  </h4>
-  {{ currentMonth }}
-  <div class="horizontal-bar"></div>
-  <div *ngIf="contents" class="content-box">
-    <ion-card *ngFor="let content of contents; let i = index">
-      <ion-row>
-        <ion-col class="sr-no">{{ i + 1 }}</ion-col>
-        <ion-col style="padding: 10px;font-size: 20px;margin: auto;">
-          {{ content.content_name }}
-        </ion-col></ion-row
-      >
-      <div class="total-views">
-        {{ "content.total_views" | translate }} {{ content.total_views }}
-      </div>
-    </ion-card>
+<ion-content>
+  <div class="mostviewed-cntn-box" padding>
+    <h4 class="title">
+      {{ "content.your_contentin_lastmonth" | translate }}
+    </h4>
+    {{ currentMonth }}
+    <div class="horizontal-bar"></div>
+    <div *ngIf="contents" class="content-box">
+      <ion-card *ngFor="let content of contents; let i = index">
+        <ion-row>
+          <ion-col class="sr-no">{{ i + 1 }}</ion-col>
+          <ion-col style="padding: 10px;font-size: 20px;margin: auto;">
+            {{ content.content_name }}
+          </ion-col>
+        </ion-row>
+        <div class="total-views">
+          {{ "content.total_views" | translate }} {{ content.total_views }}
+        </div>
+      </ion-card>
+    </div>
   </div>
-</div>
-<div *ngIf="!contents" class="no-data-found">
-  {{ "messages.no_data_found" | translate }}
-</div>
+  <div *ngIf="!contents" class="no-data-found">
+    {{ "messages.no_data_found" | translate }}
+  </div>
+</ion-content>

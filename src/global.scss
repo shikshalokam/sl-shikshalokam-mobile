@@ -53,8 +53,14 @@ table {
     font-weight: 600;
   }
 }
-
 #custom-header {
   position: initial !important;
   z-index: auto !important;
+}
+.no-data-found {
+  margin: auto;
+  font-size: 24px;
+  padding-top: 20%;
+  color: #756f6f;
+  text-align: center;
 }

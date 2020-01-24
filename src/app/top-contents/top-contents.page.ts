@@ -55,22 +55,6 @@ export class TopContentsPage implements OnInit {
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     } catch (error) {
     }
-    // if (this.type == "topContents") {
-    //   this.showSkeleton = true;
-    //   this.getTopViewedContents();
-    // } else if (this.type == "downloads") {
-    //   this.showSkeleton = true;
-    //   this.getDownloadedContent();
-    // } else if (this.type == "courses") {
-    //   this.showSkeleton = true;
-    //   this.getEnrolledCourses();
-    // } else if (this.type == "contents") {
-    //   this.showSkeleton = true;
-    //   this.getUsageByContent();
-    // } else if (this.type = "samiksha") {
-    //   this.getReports();
-    // }
-
   }
   ngOnInit() {
 
