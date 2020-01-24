@@ -13,8 +13,6 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-
-
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
@@ -45,7 +43,6 @@ export class AppComponent {
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
-    this.backButtonEvent();
     statusBar.backgroundColorByHexString('#2693ee');
     statusBar.styleDefault();
     splashScreen.hide();
@@ -59,7 +56,6 @@ export class AppComponent {
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#af4038');
       this.splashScreen.hide();
-
       this.platform.backButton.subscribeWithPriority(0, () => {
         const tree: UrlTree = this.router.parseUrl(this.router.url);
         const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
@@ -88,23 +84,8 @@ export class AppComponent {
           }
         });
       });
-
-
-      // this.platform.backButton.subscribeWithPriority(9999, () => {
-      //   if (this.router.url == '/about' || this.router.url == '/home') {
-      //     this.closeAppPopUP();
-      //     }else {
-
-      //     }
-      //   })
     });
-
   }
-
-
-  backButtonEvent() {
-  }
-
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
@@ -126,13 +107,6 @@ export class AppComponent {
     await alert.present();
   }
 
-
-
-
-
-
-
-
   // exit from  app
   async closeAppPopUP() {
     const alert = await this.alertController.create({
@@ -144,7 +118,6 @@ export class AppComponent {
           role: 'cancel',
           cssClass: 'secondary, custom-btn',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
           }
         }, {
           cssClass: 'secondary, custom-btn',
@@ -157,9 +130,4 @@ export class AppComponent {
     });
     await alert.present();
   }
-
-
-
-
-
 }

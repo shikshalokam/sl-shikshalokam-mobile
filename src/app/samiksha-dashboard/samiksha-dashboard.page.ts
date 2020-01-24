@@ -11,10 +11,7 @@ import { ProgramsService } from '../programs/programs.service';
   styleUrls: ['./samiksha-dashboard.page.scss'],
 })
 export class SamikshaDashboardPage implements OnInit {
-  private showNoMsgCard;
   private type;
-  private showChart: boolean = false;
-  private currentMonth;
   private showSkeleton: boolean = true;
   private reports;
   private parameters;
@@ -24,13 +21,15 @@ export class SamikshaDashboardPage implements OnInit {
   private skeletons = [{}, {}, {}, {}, {}, {}, {}];
   private datas;
   highcharts = Highcharts;
-  constructor(private topContentService: TopContentService, private storage: Storage, private api: ApiProvider,
-    private programsService: ProgramsService, private activatedRoute: ActivatedRoute) { }
+  constructor(private topContentService: TopContentService,
+    private storage: Storage,
+    private api: ApiProvider,
+    private programsService: ProgramsService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.getReports();
   }
-
 
   //  get reports
   public getReports() {
@@ -49,7 +48,6 @@ export class SamikshaDashboardPage implements OnInit {
               if (data.reportSections) {
                 this.reports = data;
                 this.prepareCharts();
-                this.showNoMsgCard = false;
               } else {
                 //  this.showNoMsgCard = true;
               }
@@ -87,9 +85,7 @@ export class SamikshaDashboardPage implements OnInit {
         }
       },
       series: this.reports.reportSections[0].chart.data
-
     }
     this.datas = this.reports.reportSections[1];
-
   }
 }
