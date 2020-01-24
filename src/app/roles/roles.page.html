@@ -8,18 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="!roles" class="no-data-found">
+  <div *ngIf="!roles || roles && roles.length == 0" class="no-data-found">
     {{ "messages.no_data_found" | translate }}
   </div>
-  <div *ngIf="roles">
+  <div *ngIf="roles && roles.length > 0">
     <div *ngFor="let role of roles.roles">
-      <ion-card
-        style="padding:15px;"
-        *ngFor="let entity of role.entities"
-        (click)="
+      <ion-card style="padding:15px;" *ngFor="let entity of role.entities" (click)="
           getEntityList(entity._id, entity.entityType, entity.subEntityGroups)
-        "
-      >
+        ">
         {{ entity.name }}
         <ion-icon style="float:right" name="arrow-forward"></ion-icon>
       </ion-card>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.Shikshalokam.Shikshalokamapp.qa" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Shikshalokam.qa</name>
+<widget id="org.Shikshalokam.slsuite" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>slsuite</name>
     <description>Shikshalokam</description>
     <author email="vishubadiger33@gmail.com" href="http://ionicframework.com/">Bachi</author>
     <content src="index.html" />

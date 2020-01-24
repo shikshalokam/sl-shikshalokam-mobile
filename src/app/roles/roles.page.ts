@@ -18,7 +18,7 @@ export class RolesPage implements OnInit {
   private skeletons = [{}, {}, {}, {}, {}, {}, {}];
   highcharts = Highcharts;
   constructor(private storage: Storage, private router: Router, private api: ApiProvider,
-    private programsService: ProgramsService, private activatedRoute: ActivatedRoute,private toastController:ToastController, private appContentService: AppContentService) { }
+    private programsService: ProgramsService, private activatedRoute: ActivatedRoute, private toastController: ToastController, private appContentService: AppContentService) { }
 
   ngOnInit() {
     this.getRoles()
@@ -37,7 +37,8 @@ export class RolesPage implements OnInit {
             this.showSkeleton = true;
             this.appContentService.getRoles(userTokens.access_token).subscribe((data: any) => {
               this.showSkeleton = false;
-              if (data.result) {
+              console.log(data.result, "data.result");
+              if (data.result.length) {
                 this.roles = data.result;
                 //  this.showNoMsgCard = false;
               } else {

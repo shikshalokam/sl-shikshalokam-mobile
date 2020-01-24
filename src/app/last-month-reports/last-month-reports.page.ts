@@ -62,9 +62,18 @@ export class LastMonthReportsPage implements OnInit {
     })
   }
   public setupChart() {
-    let totalTask = this.report.completed + this.report.pending;
-    let completed: any = (this.report.completed / totalTask) * 100;
-    completed = completed.toFixed(0);
+    let totalTask;
+    let completed: any;
+    if (this.report.completed > 0 || this.report.pending > 0) {
+      totalTask = this.report.completed + this.report.pending;
+      completed = (this.report.completed / totalTask) * 100;
+      completed = completed.toFixed(0);
+
+    } else {
+      this.report.completed = 0;
+      this.report.pending = 0;
+      completed = 0;
+    }
     this.chartOptions = {
       chart: {
         type: 'pie'
