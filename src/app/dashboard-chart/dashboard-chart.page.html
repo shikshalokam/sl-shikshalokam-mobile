@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button auto-hide="false"> </ion-back-button>
+        </ion-buttons>
+    <ion-title>{{ "dashboard.my_dashboard" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e8e8e8;">
+  <!-- Dashboard content -->
+  <div class="welcome-note" padding>
+    <h3 color="primary">{{ "dashboard.my_dashboard" | translate }}</h3>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        *ngFor="let application of applications"
+        style="min-width:50%;max-width:50%; padding: 0px;"
+      >
+        <ion-card (click)="navigateToContent(application.appName)">
+          <ion-card-header>
+            <ion-img src="{{ application.icon }}"></ion-img>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

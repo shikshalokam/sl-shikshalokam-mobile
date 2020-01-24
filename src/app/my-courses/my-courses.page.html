@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="mostviewed-cntn-box" padding>
+      <h4 class="title">
+        {{ "courses.your_coursesin_lastmonth" | translate }}
+      </h4>
+      {{ lastMonth }}
+      <div class="horizontal-bar"></div>
+      <div id="container"></div>
+    <div *ngIf="!showSkeleton && showNoMsgCard" class="no-data-found">
+      {{ "messages.no_data_found" | translate }}
+    </div>
+  </div>
+  <div *ngIf="showSkeleton">
+    <div class="skeleton-card-content">
+      <ion-card *ngFor="let skeleton of skeletons">
+        <ion-card-content class="skeleton-card-content">
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

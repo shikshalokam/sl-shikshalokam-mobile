@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button> </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="appName == 'Bodh'">
+    <ion-grid class="section-part bottom-brdr">
+      <h3 padding>My activity</h3>
+      <ion-row class="bottom-brdr">
+        <ion-col (click)="navigateToContent('contents')">
+          <ion-card class="custom-card">
+            <img src="assets/images/content.png" />
+            <p>
+              Content
+            </p>
+          </ion-card>
+        </ion-col>
+        <ion-col (click)="navigateToContent('courses')">
+          <ion-card class="custom-card">
+            <img src="assets/images/courses.png" />
+            <p>
+              Courses
+            </p>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- Monthly Activity -->
+    <div class="section-part">
+      <h3 padding>Monthly Activity</h3>
+      <ion-card class="activity-card" (click)="navigateToContent('downloads')">
+        Top 5 downloaded by you <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-card>
+      <ion-card
+        class="activity-card"
+        (click)="navigateToContent('topContents')"
+      >
+        Top 5 content on the Platform
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-card>
+      <ion-card class="activity-card" (click)="navigateToContent('courses')">
+        Enrolled Courses<ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="appName == 'Samiksha'">
+    <div *ngIf="roles">
+      <div *ngFor="let role of roles.roles">
+        <ion-card
+          style="padding:15px;"
+          *ngFor="let entity of role.entities"
+          (click)="
+            getEntityList(entity._id, entity.entityType, entity.subEntityGroups)
+          "
+        >
+          {{ entity.name }}
+          <ion-icon style="float:right" name="arrow-forward"></ion-icon>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- skeleton / loader -->
+  <div *ngIf="showSkeleton">
+    <div class="skeleton-card-content">
+      <ion-card *ngFor="let skeleton of skeletons">
+        <ion-card-content class="skeleton-card-content">
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text
+            ><ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <!-- skeleton / loader ends here-->
+  <!-- print message if no data -->
+  <div *ngIf="showNoMsgCard">
+    <ion-card class="no-data-msg"> <h5>No Data available.</h5></ion-card>
+  </div>
+</ion-content>

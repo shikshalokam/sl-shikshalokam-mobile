@@ -1,0 +1,78 @@
+.apps-container
+{
+  background: #fff;
+  padding: 18px 30px;
+}
+ion-card {
+  background: #fff;
+}
+.custom-col {
+  min-width: 20%;
+  padding: 0px;
+  text-align: left;
+  margin-right: 20px;
+  max-width: 20%;
+  ion-card {
+    text-align: center;
+    margin: 0px;
+  }
+}
+
+.app-suite {
+  padding: 0px 15px;
+  ion-grid {
+    padding: 0px !important;
+  }
+
+  ion-card-title {
+    font-size: 16px;
+    margin: 0px;
+    display: block;
+    color: #af4038;
+    margin-top: 14px;
+  }
+}
+.app-title {
+  background: #e6e5e5;
+}
+
+.my-apps-lists {
+  border-radius: 145px;
+  background: #e6e5e5;
+  max-height: 70px;
+  min-height: 70px;
+  margin-bottom: 45px;
+  border-top-left-radius: 298px;
+  border-bottom-left-radius: 230px;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.16);
+  img {
+    height: auto;
+    width: auto;
+    position: initial;
+    margin: -18px;
+    max-width: 102px;
+  }
+  .titles {
+    margin: 21px 0px;
+    padding: 0px;
+  }
+  .icons {
+    min-width: 31%;
+    max-width: 31%;
+  }
+}
+.dasboards {
+  background: #eae7e7;
+  .sc-ion-card-md-h {
+    border-radius: 30px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+  h3 {
+    padding: 13px 0px 0px 30px;
+  }
+  ion-img {
+    width: 90%;
+    margin: auto;
+  }
+}

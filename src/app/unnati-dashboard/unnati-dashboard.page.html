@@ -1,0 +1,33 @@
+<!-- Tabs in header -->
+<!-- <ion-tabs> -->
+<ion-header id="custom-header">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button auto-hide="false"> </ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "unnati.unnati_dashboard" | translate }}</ion-title>
+  </ion-toolbar>
+  <!-- Tabs -->
+  <!-- <ion-tab-bar slot="top"  color="primary">
+      <ion-tab-button tab="last-month-reports">
+        <ion-label>{{ "unnati.last_month" | translate }}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="last-quarter-reports">
+        <ion-label>{{ "unnati.last_quarter" | translate }}</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar> -->
+</ion-header>
+<!-- </ion-tabs> -->
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top" color="primary">
+      <ion-tab-button tab="last-month-reports">
+        <ion-label>{{ "unnati.last_month" | translate }}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="last-quarter-reports">
+        <ion-label>{{ "unnati.last_quarter" | translate }}</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

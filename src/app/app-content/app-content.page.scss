@@ -1,0 +1,47 @@
+
+  .section-part
+  {
+      h3 {
+        color: #dd3c3b;
+        line-height: 0.2;
+        font-weight: 900;
+        margin-bottom: 0px;
+      }
+    .custom-card {
+        background: #dd3c3b !important;
+        border-radius: 30px;
+        p{
+            margin: 0px 0px 15px 0px;
+            text-align: center;
+            color: #fff;
+            font-weight: 900;
+            font-size: 24px;
+        }
+        img {
+            display: block;
+            margin: 0px;
+            padding: 12px;
+            // width: 145px;
+            height: 110px;
+        }
+      }
+      
+  }
+  .bottom-brdr{
+    border-bottom:1px solid #ccc;
+    padding: 0px;
+}
+.activity-card{
+    background: #dd3c3b !important;
+    padding: 15px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 15px;
+    ion-icon
+    {
+        float: right;
+        font-weight: 900;
+        font-size: 18px;
+    }
+}

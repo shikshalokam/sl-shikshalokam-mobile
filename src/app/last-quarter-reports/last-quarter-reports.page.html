@@ -1,0 +1,79 @@
+<ion-content padding>
+    <div *ngIf="report && respStatus =='failed'">
+    <ion-card>
+      <ion-card-content>
+        <h4>No data found</h4>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="report && respStatus =='success'">
+    <h5>
+      {{ "last_quarter_report.projects_cmpltd_lstqrtr" | translate }}
+    </h5>
+    <div>{{ report.startMonth }} - {{ report.endMonth }}</div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="status-card task-completed-box">
+          <h3>{{ "last_quarter_report.completed" | translate }}</h3>
+          <h1>
+            <span  *ngIf="report.completed < 9"> 0{{ report.completed }} &nbsp;</span>
+            <span  *ngIf="report.completed > 9"> {{ report.completed }} &nbsp;</span>
+          </h1>
+        </ion-col>
+        <ion-col class="status-card task-pending-box">
+          <h3>{{ "last_quarter_report.pending" | translate }}</h3>
+          <h1>
+            <span *ngIf="report.pending < 9"> 0{{ report.pending }} &nbsp;</span>
+            <span *ngIf="report.pending > 9"> {{ report.pending }} &nbsp;</span>
+          </h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="action-item" (click)="viewFullReport('lastQuarter')">
+        {{ "last_quarter_report.view_full_reports" | translate }}
+      </div>
+    <!-- <div class="action-item"></div> -->
+    <div *ngIf="chartOptions">
+      <h5>
+        {{ "last_quarter_report.tasks_cmpltd_lstmnth" | translate }}
+      </h5>
+      <div>{{ report.startMonth }} - {{ report.endMonth }}</div>
+      <div *ngIf="chartOptions">
+        <highcharts-chart
+          [Highcharts]="highcharts"
+          [options]="chartOptions"
+          style="width: 100%; height: 400px; display: block;"
+        >
+        </highcharts-chart>
+      </div>
+      <ion-row>
+        <ion-col class="legend-left">
+          <span class="dot-pending"> &nbsp; </span> Tasks Pending <br />
+          <span style="font-size:24px; ">{{ report.pending }}</span>
+        </ion-col>
+        <ion-col class="legend-right">
+          <span class="dot-completed"> &nbsp; </span> Tasks Completed <br />
+          <span style="font-size:24px; ">{{ report.completed }}</span>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <div *ngIf="showSkeleton">
+    <div class="skeleton-card-content">
+      <ion-card *ngFor="let skeleton of skeletons">
+        <ion-card-content class="skeleton-card-content">
+          <p><ion-skeleton-text animated></ion-skeleton-text></p>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

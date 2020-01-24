@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{ "messages.welcome_note" | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--background: #eae7e7;">
+  <div class="apps-container">
+    <div class="welcome-note">
+      <h3 color="primary">{{ "home_page.my_apps" | translate }}</h3>
+    </div>
+    <ion-row
+      *ngFor="let application of applications"
+      class="my-apps-lists"
+      (click)="openApp(application.id)"
+    >
+      <ion-col class="icons"><img src="{{ application.icon }}" /> </ion-col>
+      <ion-col class="titles"
+        ><div>
+          <b>{{ application.title }}</b>
+        </div></ion-col
+      >
+    </ion-row>
+  </div>
+  <!-- Dashboard and My journey -->
+  <div class="dasboards">
+    <div class="welcome-note">
+      <h3 color="primary">{{ "home_page.my_activity" | translate }}</h3>
+    </div>
+    <ion-grid style="padding-bottom: 25px;">
+      <ion-row>
+        <ion-col *ngFor="let dashboard of dashboards">
+          <ion-card (click)="navigateToDashboard(dashboard.url)">
+            <ion-card-header>
+              <ion-img src="{{ dashboard.icon }}"></ion-img>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

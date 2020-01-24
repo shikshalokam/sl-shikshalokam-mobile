@@ -1,0 +1,61 @@
+{
+    "app_name": "Shikshalokam",
+    "home": "Home",
+    "about": "About",
+    "messages":{
+    "welcome_note":"Welcome to Shikshalokam!",
+    "internet_error" : "Please check your internet connection.",
+    "no_data_found":"No data Found"
+    },
+
+    "home_page":{
+        "my_apps":"My Apps",
+        "my_activity": "My Activity"
+    },
+    "dashboard":{
+        "my_dashboard":"My Dashboard"
+    },
+    "bodh":{
+        "bodh_dashboard":"Bodh Dashboard",
+        "top_content":"Top Content",
+        "my_downloads":"My Downloads",
+        "my_courses":"My Courses" 
+    },
+    "unnati":{
+        "unnati_dashboard":"Unnati Dashboard",
+        "last_month":"Last Month",
+        "last_quarter":"Last Quarter"
+    },
+    "fullreports":{
+        "title":"My Reports",
+        "undertaken_prjcts_inmonth":"Projects Undertaken in Last Month",
+        "undertaken_prjcts_inqrtr":"Projects Undertaken in Last Quarter"
+    },
+    "last_month_report":{
+        "projects_cmpltd_lstmnth":"Projects Completed in Last Month",
+        "pending" :"Pending",
+        "completed" : "Completed",
+        "view_full_reports":"View Full Reports",
+        "tasks_cmpltd_lstmnth":"Total Tasks Completed in Last Month"
+    },
+    "last_quarter_report":{
+        "projects_cmpltd_lstqrtr":"Projects Completed in Last Quarter",
+        "pending" :"Pending",
+        "completed" : "Completed",
+        "view_full_reports":"View Full Reports",
+        "tasks_cmpltd_lstmnth":"Total Tasks Completed in Last Quarter"
+    },
+    "downloads":
+    {
+    "your_downloadsin_lastmonth":"Your Downloads in last month",
+    "total_views":"Total views"
+    },
+    "courses":{
+    "your_coursesin_lastmonth":"YOUR COURSES IN LAST MONTH"
+    },
+    "content":{
+    "total_views":"Total views",
+    "your_contentin_lastmonth":"Most Viewed Content in last Month"
+    }
+
+}
