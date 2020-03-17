@@ -53,6 +53,7 @@ export class LoginService {
   public loggedIn(user) {
     this.emit.next(user);
   }
+
   public getToken(data) {
     this.base_url = AppConfigs.app_url;
     this.redirect_url = AppConfigs.keyCloak.redirection_url;
@@ -75,13 +76,9 @@ export class LoginService {
 
 
   checkForCurrentUserLocalData(tokens) {
-    // alert(tokens + "data in checkForCurrentUserLocalData");
     const loggedinUserId = this.currentUser.getDecodedAccessToken(tokens.access_token).sub;
     const currentUserId = this.currentUser.getCurrentUserData() ? this.currentUser.getCurrentUserData().sub : null;
-    // alert(loggedinUserId + "loggedinUserId")
-    // alert(currentUserId + "currentUserId")
     if (loggedinUserId === currentUserId || !currentUserId) {
-      // alert("In IF");
       let userTokens = {
         accessToken: tokens.access_token,
         refreshToken: tokens.refresh_token,
@@ -89,20 +86,12 @@ export class LoginService {
         isDeactivated: false
       };
       this.currentUser.setCurrentUserDetails(userTokens);
-      //let nav = this.app.getActiveNav();
-      //nav.setRoot(TabsPage);
-      // this.confirmPreviousUserName('as1@shikshalokamdev', tokens);
-
-    } else {
-      // this.confirmPreviousUserName(this.currentUser.getCurrentUserData().preferred_username, tokens);
     }
   }
   doLogout(): Promise<any> {
     return new Promise(function (resolve) {
       let logout_redirect_url = AppConfigs.keyCloak.logout_redirect_url;
-     // alert(logout_redirect_url + "logout_redirect_url");
       let logout_url = AppConfigs.app_url + "/auth/realms/sunbird/protocol/openid-connect/logout?redirect_uri=" + logout_redirect_url;
-     // alert(logout_url + "logout_url");
       let closeCallback = function (event) {
       };
       let browserRef = (<any>window).cordova.InAppBrowser.open(logout_url, "_blank", "zoom=no");
