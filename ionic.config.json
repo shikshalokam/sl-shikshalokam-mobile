@@ -3,5 +3,11 @@
   "integrations": {
     "cordova": {}
   },
+  "proxies": [
+    {
+      "path": "/login",
+      "proxyUrl": "https://dev.shikshalokam.org/login"
+    }
+  ],
   "type": "angular"
 }

@@ -8,18 +8,22 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { AppConstants } from './app.constants';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FormsModule }   from '@angular/forms';
 import { AppLauncher, AppLauncherOptions } from '@ionic-native/app-launcher/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ApiProvider } from '../app/api/api';
-import {CurrentUserProvider} from './current-user';
+import { ApiProvider } from '../services/api/api';
+import {CurrentUserProvider} from '../services/current-user/current-user';
+import { AlertUtil } from '../utils/alert.util';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,14 +42,16 @@ export function createTranslateLoader(http: HttpClient) {
   })
   ],
   providers: [
-    StatusBar, AppLauncher,InAppBrowser,Network,
+    StatusBar, AppLauncher,InAppBrowser,Network, AlertUtil,
     SplashScreen,CurrentUserProvider,ApiProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(private statusBar: StatusBar) {this.statusBar.overlaysWebView(false);
-    this.statusBar.backgroundColorByHexString('#af4038'); }
 
+export class AppModule {
+  constructor(private statusBar: StatusBar) {
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString(AppConstants.GENERAL_BACKGROUND_COLOR);
+  }
 }

@@ -1,0 +1,57 @@
+<ion-grid>
+    <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <ion-img id="login_logo" src="../../assets/images/Shiksha.png"></ion-img>
+            <div class="ion-text-center">
+                <h4>Login to Shikshalokam</h4>
+            </div>
+            <div class="ion-padding">
+                <ion-item>
+                    <ion-input type="text" [(ngModel)]="username" placeholder="Username"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="password"  [(ngModel)]="password"  placeholder="Password"></ion-input>
+                </ion-item>
+            </div>
+            <div class="ion-padding">
+                <ion-item>
+                    <ion-select class="states-select" [(ngModel)]="sl_state" placeholder="Please Select Your State">
+                        <ion-select-option value="X">Other</ion-select-option>
+                        <ion-select-option value="STATE_PUNJAB">Punjab</ion-select-option>
+                        <ion-select-option value="X">Andhra Pradesh</ion-select-option>
+                        <ion-select-option value="X">Arunachal Pradesh</ion-select-option>
+                        <ion-select-option value="X">Assam</ion-select-option>
+                        <ion-select-option value="X">Bihar</ion-select-option>
+                        <ion-select-option value="X">Chhattisgarh</ion-select-option>
+                        <ion-select-option value="X">Goa</ion-select-option>
+                        <ion-select-option value="X">Gujarat</ion-select-option>
+                        <ion-select-option value="X">Haryana</ion-select-option>
+                        <ion-select-option value="X">Himachal</ion-select-option>
+                        <ion-select-option value="X">Jharkhand</ion-select-option>
+                        <ion-select-option value="X">Karnataka</ion-select-option>
+                        <ion-select-option value="X">Kerala</ion-select-option>
+                        <ion-select-option value="X">Madhya Pradesh</ion-select-option>
+                        <ion-select-option value="X">Maharashtra</ion-select-option>
+                        <ion-select-option value="X">Manipur</ion-select-option>
+                        <ion-select-option value="X">Meghalaya</ion-select-option>
+                        <ion-select-option value="X">Mizoram</ion-select-option>
+                        <ion-select-option value="X">Nagaland</ion-select-option>
+                        <ion-select-option value="X">Odisha</ion-select-option>
+                        <ion-select-option value="X">Rajasthan</ion-select-option>
+                        <ion-select-option value="X">Sikkim</ion-select-option>
+                        <ion-select-option value="X">Tamil Nadu</ion-select-option>
+                        <ion-select-option value="X">Telangana</ion-select-option>
+                        <ion-select-option value="X">Tripura</ion-select-option>
+                        <ion-select-option value="X">Uttar Pradesh</ion-select-option>
+                        <ion-select-option value="X">Uttarakhand</ion-select-option>
+                        <ion-select-option value="X">West Bengal</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+            </div>
+            <div class="ion-padding">
+                <ion-button size="large" (click)="login()" expand="block">Login</ion-button>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-grid>

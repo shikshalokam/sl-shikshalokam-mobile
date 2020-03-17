@@ -7,6 +7,7 @@ import { Router, UrlTree, UrlSegmentGroup, UrlSegment, PRIMARY_OUTLET } from '@a
 import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { AppConstants } from './app.constants';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,11 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Login',
+      url: '/login',
+      icon: 'key'
+    },
+    {
       title: 'About',
       url: '/about',
       icon: 'information-circle'
@@ -39,11 +45,10 @@ export class AppComponent {
     private platform: Platform, private alertController: AlertController,
     private splashScreen: SplashScreen, private toastController: ToastController,
     private statusBar: StatusBar,
-    // public firebaseNative: Firebase
   ) {
-    translate.setDefaultLang('en');
-    translate.use('en');
-    statusBar.backgroundColorByHexString('#2693ee');
+    translate.setDefaultLang(AppConstants.LANG_DEFAULT);
+    translate.use(AppConstants.LANG_DEFAULT);
+    statusBar.backgroundColorByHexString(AppConstants.BACKGROUND_COLOR_HOME);
     statusBar.styleDefault();
     splashScreen.hide();
     this.initializeApp();
@@ -54,8 +59,13 @@ export class AppComponent {
 
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(false);
-      this.statusBar.backgroundColorByHexString('#af4038');
+      this.statusBar.backgroundColorByHexString(AppConstants.GENERAL_BACKGROUND_COLOR);
       this.splashScreen.hide();
+      this.doBackAction();
+          });
+  }
+
+  doBackAction() {
       this.platform.backButton.subscribeWithPriority(0, () => {
         const tree: UrlTree = this.router.parseUrl(this.router.url);
         const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
@@ -69,22 +79,18 @@ export class AppComponent {
             await this.router.navigate(['/app-content/Samiksha']);
           } else if (s[0].path == 'top-contents' && s[3].path == 'samiksha') {
             this.location.back();
-          }
-          else if (s[0].path == 'top-contents') {
+          } else if (s[0].path == 'top-contents') {
             await this.router.navigate(['/app-content/Bodh']);
-          }
-          else if (this.router.url === '/home') {
+          } else if (this.router.url === '/home') {
             if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
               this.lastTimeBackPress = new Date().getTime();
               this.presentAlertConfirm();
-            }
-            else {
+            } else {
               navigator['app'].exitApp();
             }
           }
         });
       });
-    });
   }
 
   async presentAlertConfirm() {
