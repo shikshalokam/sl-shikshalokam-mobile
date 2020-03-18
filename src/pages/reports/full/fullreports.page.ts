@@ -5,7 +5,7 @@ import { ApiProvider } from '../../../services/api/api';
 import { Storage } from '@ionic/storage';
 import * as Highcharts from 'highcharts/highcharts-gantt';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { AppConstants } from '../../../app/app.constants.ts';
+import { AppConstants } from '../../../app/app.constants';
 
 @Component({
   selector: 'app-fullreports',

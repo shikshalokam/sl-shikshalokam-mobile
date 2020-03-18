@@ -24,13 +24,18 @@ export class LastMonthReportsPage implements OnInit {
   respStatus;
   private skeletons = [{}, {}, {}, {}, {}];
   highcharts = Highcharts;
-  constructor(private unnatiDashboardService: UnnatiDashboardService, private router: Router, public toastController: ToastController, private api: ApiProvider, private storage: Storage) { }
+
+  constructor(private unnatiDashboardService: UnnatiDashboardService,
+    private router: Router, public alertUtil: AlertUtil,
+    public toastController: ToastController, private api: ApiProvider,
+    private storage: Storage) {
+  }
 
   ngOnInit() {
     if (navigator.onLine) {
       this.getData();
     } else {
-      this.AlertUtil.errorMessageToast('Please check your internet connection.');
+      this.alertUtil.errorMessageToast('Please check your internet connection.');
     }
   }
 
@@ -55,15 +60,15 @@ export class LastMonthReportsPage implements OnInit {
               this.showSkeleton = false;
             }, error => {
               this.showSkeleton = false;
-            })
+            });
           }, error => {
             this.showSkeleton = false;
-          })
+          });
         }
       }, error => {
         this.showSkeleton = false;
-      })
-    })
+      });
+    });
   }
 
   public setupChart() {
@@ -123,8 +128,7 @@ export class LastMonthReportsPage implements OnInit {
     if (navigator.onLine) {
       this.router.navigate(['/fullreports', value]);
     } else {
-      this.AlertUtil.errorMessageToast('Please check your internet connection.');
+      this.alertUtil.errorMessageToast('Please check your internet connection.');
     }
   }
-
 }

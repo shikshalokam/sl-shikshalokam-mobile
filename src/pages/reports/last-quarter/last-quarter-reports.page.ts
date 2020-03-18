@@ -22,20 +22,25 @@ export class LastQuarterReportsPage implements OnInit {
   private skeletons = [{}, {}, {}, {}, {}]
   highcharts = Highcharts;
   respStatus;
-  constructor(private unnatiDashboardService: UnnatiDashboardService, private router: Router, private toastController: ToastController, private api: ApiProvider, private storage: Storage) { }
+  constructor(private unnatiDashboardService: UnnatiDashboardService,
+    private router: Router, private toastController: ToastController,
+    private api: ApiProvider, private storage: Storage,
+    private alertUtil: AlertUtil) {
+  }
 
   ngOnInit() {
     if (navigator.onLine) {
       this.getData();
     } else {
-      this.AlertUtil.errorMessageToast('Please check your internet connection.');
+      this.alertUtil.errorMessageToast('Please check your internet connection.');
     }
   }
+
   public viewFullReport(value) {
     if (navigator.onLine) {
       this.router.navigate(['/fullreports', value]);
     } else {
-      this.AlertUtil.errorMessageToast('Please check your internet connection.');
+      this.alertUtil.errorMessageToast('Please check your internet connection.');
     }
   }
 
@@ -59,16 +64,17 @@ export class LastQuarterReportsPage implements OnInit {
               this.showSkeleton = false;
             }, error => {
               this.showSkeleton = false;
-            })
+            });
           }, error => {
             this.showSkeleton = false;
-          })
+          });
         }
       }, error => {
         this.showSkeleton = true;
-      })
-    })
+      });
+    });
   }
+
   public setupChart() {
     let totalTask;
     let completed: any;
@@ -76,7 +82,6 @@ export class LastQuarterReportsPage implements OnInit {
       totalTask = this.report.completed + this.report.pending;
       completed = (this.report.completed / totalTask) * 100;
       completed = completed.toFixed(0);
-
     } else {
       this.report.completed = 0;
       this.report.pending = 0;

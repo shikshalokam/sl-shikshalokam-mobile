@@ -6,7 +6,7 @@ import * as Highcharts from 'highcharts/highcharts-gantt';
 import { ProgramsService } from '../programs/programs.service';
 import { AppContentService } from '../app-content/app-content.service';
 import { AlertUtil } from '../../utils/alert.util';
-import { AppConstants } from '../../app/app.constants.ts';
+import { AppConstants } from '../../app/app.constants';
 
 @Component({
   selector: 'app-roles',

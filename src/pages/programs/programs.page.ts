@@ -4,7 +4,7 @@ import { ApiProvider } from '../../services/api/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProgramsService } from './programs.service';
 import { AlertUtil } from '../../utils/alert.util';
-import { AppConstants } from '../../app/app.constants.ts';
+import { AppConstants } from '../../app/app.constants';
 
 @Component({
   selector: 'app-programs',

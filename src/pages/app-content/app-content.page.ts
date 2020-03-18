@@ -5,14 +5,14 @@ import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../../services/api/api';
 import * as Highcharts from 'highcharts/highcharts-gantt';
 import { AppContentService } from './app-content.service';
-import { AppConstants } from '../../../app/app.constants';
-import { AlertUtil } from '../../../utils/alert.util';
+import { AppConstants } from '../../app/app.constants';
 
 @Component({
    selector: 'app-app-content',
    templateUrl: './app-content.page.html',
    styleUrls: ['./app-content.page.scss'],
 })
+
 export class AppContentPage implements OnInit {
    public appName;
    public title;
@@ -20,6 +20,7 @@ export class AppContentPage implements OnInit {
    public showNoMsgCard: boolean = false;
    private roles;
    private skeletons = [{}, {}, {}, {}, {}, {}, {}];
+
    constructor(private activatedRoute: ActivatedRoute,
         private appContentService: AppContentService,
         private router: Router,
@@ -45,6 +46,7 @@ export class AppContentPage implements OnInit {
    ngOnInit() {
 
    }
+
    // navigate to content
    public navigateToContent(type) {
       if (navigator.onLine) {
@@ -80,11 +82,9 @@ export class AppContentPage implements OnInit {
                   })
                }, error => {
                   this.showSkeleton = false;
-               })
+               });
             }
-         })
-      })
+         });
+      });
    }
-
-
 }

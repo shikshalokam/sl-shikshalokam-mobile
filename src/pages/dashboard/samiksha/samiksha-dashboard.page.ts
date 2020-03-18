@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as Highcharts from 'highcharts/highcharts-gantt';
 //FIXME:: this service below can be moved to service layer instead?
 import { ProgramsService } from '../../programs/programs.service';
-import { AppConstants } from '../../../app/app.constants.ts';
+import { AppConstants } from '../../../app/app.constants';
 
 @Component({
   selector: 'app-samiksha-dashboard',

@@ -113,11 +113,11 @@ export class LoginService {
     return new Promise(resolve => {
       const body = new URLSearchParams();
       const params = 'grant_type=authorization_code&client_id='+AppConfigs.clientId+'&code='+token+'&redirect_uri='+AppConfigs.keyCloak.redirection_url+'&scope=offline_access'
-      body.set('grant_type', "authorization_code");
+      body.set('grant_type', 'authorization_code');
       body.set('client_id', AppConfigs.clientId);
       body.set('code', token);
       body.set('redirect_uri', AppConfigs.keyCloak.redirection_url);
-      body.set('scope', "offline_access");
+      body.set('scope', 'offline_access');
       const url = AppConfigs.app_url  + AppConfigs.keyCloak.getAccessToken;
       this.http.post(url, body)
         .subscribe((data: any) => {

@@ -37,7 +37,7 @@ export class TopContentsPage implements OnInit {
     private programsService: ProgramsService, private activatedRoute: ActivatedRoute) {
     activatedRoute.params.subscribe(params => {
       this.type = params.type;
-      if (params.type == APP_SAMIKSHA) {
+      if (params.type == AppConstants.APP_SAMIKSHA) {
         this.parameters = params;
         this.getReports();
       }

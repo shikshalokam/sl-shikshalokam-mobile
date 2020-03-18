@@ -8,13 +8,14 @@ import * as Highcharts from 'highcharts/highcharts-gantt';
 //FIXME:: can be in service layer?
 import { ProgramsService } from '../../programs/programs.service';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { AppConstants } from '../../../app/app.constants.ts';
+import { AppConstants } from '../../../app/app.constants';
 
 @Component({
   selector: 'app-my-downloads',
   templateUrl: './my-downloads.page.html',
-  styleUrls: ['./my-downloads.page.scss'],
+  styleUrls: ['./my-downloads.page.scss']
 })
+
 export class MyDownloadsPage implements OnInit {
   type;
   showChart: boolean = false;
@@ -28,12 +29,15 @@ export class MyDownloadsPage implements OnInit {
   highcharts = Highcharts;
 
   constructor(private topContentService: TopContentService, private storage: Storage, private api: ApiProvider, private screenOrientation: ScreenOrientation,
-    private programsService: ProgramsService, private activatedRoute: ActivatedRoute) { }
+    private programsService: ProgramsService, private activatedRoute: ActivatedRoute) {
+
+  }
 
   ngOnInit() {
     this.getCurrentMonth();
     this.getDownloadedContent();
   }
+
   ionViewDidEnter() {
     try {
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
@@ -44,7 +48,7 @@ export class MyDownloadsPage implements OnInit {
   // get downloaded content
   public getDownloadedContent() {
     this.storage.get(AppConstants.STORAGE_USER_TOKENS).then(data => {
-      this.api.refresh(data.refresh_token).subscribe((data: any) => {
+      this.api.refreshToken(data.refresh_token).subscribe((data: any) => {
         let parsedData = JSON.parse(data._body);
         if (parsedData && parsedData.access_token) {
           let userTokens = {
@@ -61,13 +65,13 @@ export class MyDownloadsPage implements OnInit {
               this.showSkeleton = false;
             }, error => {
               this.showSkeleton = false;
-            })
+            });
           }, error => {
             this.showSkeleton = false;
-          })
+          });
         }
-      })
-    })
+      });
+    });
   }
 
   // get last month

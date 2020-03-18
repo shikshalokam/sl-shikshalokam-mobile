@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../../services/api/api';
 import { AppContentService } from '../app-content/app-content.service';
-import { AppConstants } from '../../../app/app.constants';
+import { AppConstants } from '../../app/app.constants';
 import { AlertUtil } from '../../utils/alert.util';
 
 @Component({
@@ -11,12 +11,14 @@ import { AlertUtil } from '../../utils/alert.util';
   templateUrl: './entities.page.html',
   styleUrls: ['./entities.page.scss'],
 })
+
 export class EntitiesPage implements OnInit {
   private params;
   private showSkeleton: boolean = false;
   private skeletons = [{}, {}, {}, {}, {}, {}, {}];
   private entities;
   private showNoMsgCard: boolean = false;
+
   constructor(private activatedRouter: ActivatedRoute,
     private router: Router, private appContentService: AppContentService,
     private storage: Storage, private api: ApiProvider, private alertUtil: AlertUtil) {
@@ -33,6 +35,7 @@ export class EntitiesPage implements OnInit {
 
   ngOnInit() {
   }
+
   //  Get entities based on user type
   public getEntities() {
     this.storage.get(AppConstants.STORAGE_USER_TOKENS).then(data => {
@@ -59,10 +62,10 @@ export class EntitiesPage implements OnInit {
             })
           }, error => {
             this.showSkeleton = false;
-          })
+          });
         }
-      })
-    })
+      });
+    });
   }
 
   // Get program lists based on entities

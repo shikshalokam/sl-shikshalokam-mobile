@@ -5,17 +5,15 @@ import { ApiProvider } from '../../../services/api/api';
 import * as jwt_decode from "jwt-decode";
 import * as Highcharts from 'highcharts/highcharts-gantt';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { AppConstants } from '../../../app/app.constants.ts';
+import { AppConstants } from '../../../app/app.constants';
 
 @Component({
   selector: 'app-my-courses',
   templateUrl: './my-courses.page.html',
   styleUrls: ['./my-courses.page.scss'],
 })
+
 export class MyCoursesPage implements OnInit {
-  monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
   showNoMsgCard: boolean = false;
   lastMonth;
   showSkeleton: boolean = true;
@@ -31,19 +29,21 @@ export class MyCoursesPage implements OnInit {
     private topContentService: TopContentService,
     private storage: Storage,
     private api: ApiProvider,
-    private screenOrientation: ScreenOrientation) { }
-
+    private screenOrientation: ScreenOrientation) {
+  }
 
   ngOnInit() {
     this.getEnrolledCourses();
     this.getLastMonth();
   }
+
   ionViewDidEnter() {
     try {
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     } catch (error) {
     }
   }
+
   // get enrolled courses
   public getEnrolledCourses() {
     this.showSkeleton = true;
@@ -75,17 +75,17 @@ export class MyCoursesPage implements OnInit {
               }
             }, error => {
               this.showSkeleton = false;
-            })
+            });
           }, error => {
             this.showSkeleton = false;
-          })
+          });
         }
       }, error => {
         this.showSkeleton = false;
-      })
+      });
     }, error => {
       this.showSkeleton = false;
-    })
+    });
   }
 
   // chart setup
@@ -138,6 +138,6 @@ export class MyCoursesPage implements OnInit {
   // get last month
   public getLastMonth() {
     let date = new Date();
-    this.lastMonth = this.monthNames[date.getMonth() - 1];
+    this.lastMonth = AppConstants.MONTH_NAMES[date.getMonth() - 1];
   }
 }
