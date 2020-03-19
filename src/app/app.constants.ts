@@ -9,5 +9,6 @@ export const AppConstants = {
   BACKGROUND_COLOR_HOME : '#2693ee',
   LANG_DEFAULT : 'en',
   MONTH_NAMES : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-  STORAGE_USER_TOKENS : 'userTokens'
+  STORAGE_USER_TOKENS : 'userTokens',
+  EVENT_SUNBIRD_AUTH : 'sunbird_auth'
 }

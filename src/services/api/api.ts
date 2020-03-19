@@ -52,7 +52,6 @@ export class ApiProvider {
         this.reLoginAlert();
       }).catch(error => {
       })
-    } else {
     }
   }
 

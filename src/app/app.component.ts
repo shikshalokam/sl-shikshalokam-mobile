@@ -1,5 +1,5 @@
 import { Component, ViewChild, QueryList, ViewChildren } from '@angular/core';
-import { Platform, NavController, IonRouterOutlet } from '@ionic/angular';
+import { Platform, NavController, IonRouterOutlet, Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AlertController } from '@ionic/angular';
@@ -19,32 +19,17 @@ export class AppComponent {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
   @ViewChild(NavController) nav: NavController;
-  public appPages = [
-    {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'Login',
-      url: '/login',
-      icon: 'key'
-    },
-    {
-      title: 'About',
-      url: '/about',
-      icon: 'information-circle'
-    }
-  ];
 
   public isConnected;
   public loggedInUser;
+  public toggleLogin: any = true;
+
   constructor(
     private router: Router, private location: Location, private translate: TranslateService,
     //  private fcm: FcmService,
     private platform: Platform, private alertController: AlertController,
     private splashScreen: SplashScreen, private toastController: ToastController,
-    private statusBar: StatusBar,
+    private statusBar: StatusBar, private events: Events
   ) {
     translate.setDefaultLang(AppConstants.LANG_DEFAULT);
     translate.use(AppConstants.LANG_DEFAULT);
@@ -56,13 +41,17 @@ export class AppComponent {
 
   // Initial call
   initializeApp() {
+    this.events.subscribe(AppConstants.EVENT_SUNBIRD_AUTH, ()=>{
+      this.toggleLogin = !this.toggleLogin;
+    });
 
     this.platform.ready().then(() => {
+      this.toggleLogin = (localStorage.getItem("token") == null);
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString(AppConstants.GENERAL_BACKGROUND_COLOR);
       this.splashScreen.hide();
       this.doBackAction();
-          });
+    });
   }
 
   doBackAction() {

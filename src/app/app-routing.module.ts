@@ -29,7 +29,8 @@ const routes: Routes = [
   { path: 'my-courses', loadChildren: '../pages/my/courses/my-courses.module#MyCoursesPageModule' },
   { path: 'roles', loadChildren: '../pages/roles/roles.module#RolesPageModule' },
    { path: 'fullreports/:state', loadChildren: '../pages/reports/full/fullreports.module#FullreportsPageModule' },
-  { path: 'login', loadChildren: '../pages/login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: '../pages/login/login.module#LoginPageModule' },
+  { path: 'logout', loadChildren: '../pages/logout/logout.module#LogoutPageModule' }
 ];
 
 
