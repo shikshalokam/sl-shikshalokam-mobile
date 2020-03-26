@@ -10,8 +10,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: '../pages/home/home.module#HomePageModule'
-  }
-  ,
+  },
   { path: 'about', loadChildren: '../pages/about/about.module#AboutPageModule' },
   { path: 'my-journey', loadChildren: '../pages/my/journey/my-journey.module#MyJourneyPageModule' },
   { path: 'dashboard-chart', loadChildren: '../pages/dashboard/chart/dashboard-chart.module#DashboardChartPageModule' },

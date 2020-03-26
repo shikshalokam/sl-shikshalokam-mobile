@@ -8,16 +8,18 @@ import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConstants } from './app.constants';
+import { FCMService } from '../services/fcm/fcm.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
+
 export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
-  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   @ViewChild(NavController) nav: NavController;
 
   public isConnected;
@@ -26,10 +28,10 @@ export class AppComponent {
 
   constructor(
     private router: Router, private location: Location, private translate: TranslateService,
-    //  private fcm: FcmService,
     private platform: Platform, private alertController: AlertController,
     private splashScreen: SplashScreen, private toastController: ToastController,
-    private statusBar: StatusBar, private events: Events
+    private statusBar: StatusBar, private events: Events,
+    private fcmService: FCMService
   ) {
     translate.setDefaultLang(AppConstants.LANG_DEFAULT);
     translate.use(AppConstants.LANG_DEFAULT);
@@ -46,6 +48,7 @@ export class AppComponent {
     });
 
     this.platform.ready().then(() => {
+      this.fcmService.initSequences();
       this.toggleLogin = (localStorage.getItem("token") == null);
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString(AppConstants.GENERAL_BACKGROUND_COLOR);
@@ -60,7 +63,9 @@ export class AppComponent {
         const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
         const s: UrlSegment[] = g.segments;
         this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
-          if (this.router.url == '/app-content/Samiksha' || this.router.url == '/app-content/Bodh' || s[0].path == 'top-contents') {
+          if ( this.router.url == '/login' || this.router.url == '/logout' ) {
+            await this.router.navigate(['/home']);
+          } else if (this.router.url == '/app-content/Samiksha' || this.router.url == '/app-content/Bodh' || s[0].path == 'top-contents') {
             await this.router.navigate(['/dashboard-chart']);
           } else if (this.router.url == '/dashboard-chart') {
             await this.router.navigate(['/home']);
@@ -84,7 +89,6 @@ export class AppComponent {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      // header: 'Confirm!',
       message: 'Are you sure you want to exit the app?',
       buttons: [{
         text: 'Cancel',
